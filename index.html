@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zico Xu — Personal Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f9f7f4;
+      --surface:   #ffffff;
+      --border:    #e4e0d8;
+      --text:      #1c1a17;
+      --muted:     #6b6560;
+      --accent:    #3a6ea8;
+      --accent-lt: #edf2f9;
+      --accent-dk: #2a5088;
+      --red:       #c0392b;
+      --font-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-serif:'Lora', Georgia, serif;
+      --radius:    6px;
+      --shadow:    0 2px 12px rgba(0,0,0,.07);
+      --shadow-lg: 0 6px 24px rgba(0,0,0,.11);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-dk); text-decoration: underline; }
+
+    /* ─── Layout ────────────────────────────────────────── */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ─── Top bar ───────────────────────────────────────── */
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      margin-bottom: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .topbar-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      letter-spacing: .01em;
+      color: var(--text);
+    }
+    .topbar-nav { display: flex; gap: 20px; font-size: .875rem; color: var(--muted); }
+    .topbar-nav a { color: var(--muted); }
+    .topbar-nav a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ─── Hero / Header ─────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 36px;
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+    .hero-name-cn {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 14px;
+      font-family: var(--font-sans);
+    }
+    .hero-title {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .02em;
+      margin-bottom: 2px;
+    }
+    .hero-affil {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .hero-bio {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text);
+      max-width: 560px;
+    }
+    .hero-bio strong { color: var(--accent); font-weight: 600; }
+
+    /* Avatar */
+    .avatar-wrap { display: flex; justify-content: center; }
+    .avatar {
+      width: 156px;
+      height: 156px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3a6ea8 0%, #6fa3d4 50%, #a8c8e8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      color: #fff;
+      letter-spacing: .04em;
+      box-shadow: 0 4px 20px rgba(58,110,168,.25);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 -4px 12px rgba(0,0,0,.12);
+    }
+
+    /* ─── Contact badges ────────────────────────────────── */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 56px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      transition: all .18s;
+      cursor: pointer;
+      letter-spacing: .02em;
+    }
+    .badge i { font-size: .85em; }
+    .badge:hover {
+      border-color: var(--accent);
+      background: var(--accent-lt);
+      color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(58,110,168,.15);
+    }
+    .badge-email:hover  { border-color: #c0392b; background: #fdf0ee; color: #c0392b; }
+    .badge-github:hover { border-color: #24292e; background: #f0f0f0; color: #24292e; }
+    .badge-cv:hover     { border-color: #27ae60; background: #edfaf3; color: #27ae60; }
+
+    /* ─── Section label ─────────────────────────────────── */
+    .section { margin-bottom: 52px; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-head h2 {
+      font-family: var(--font-sans);
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+    }
+    .section-head .cn {
+      font-size: .82rem;
+      color: var(--border);
+      font-weight: 400;
+    }
+    .section-head .accent-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-bottom: 2px;
+    }
+
+    /* ─── News ──────────────────────────────────────────── */
+    .news-list {
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 6px;
+    }
+    .news-list::-webkit-scrollbar { width: 4px; }
+    .news-list::-webkit-scrollbar-track { background: var(--border); border-radius: 2px; }
+    .news-list::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    .news-item {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      font-size: .92rem;
+    }
+    .news-date {
+      font-family: 'Source Sans 3', monospace;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      background: var(--accent-lt);
+      padding: 1px 7px;
+      border-radius: 4px;
+      letter-spacing: .03em;
+    }
+    .news-text { color: var(--text); line-height: 1.6; }
+    .news-text a { font-weight: 600; }
+
+    /* ─── Publications ──────────────────────────────────── */
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+
+    .pub-card {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 20px;
+      padding: 20px 16px;
+      border-radius: var(--radius);
+      transition: all .2s;
+      border: 1px solid transparent;
+    }
+    .pub-card:hover {
+      background: var(--surface);
+      border-color: var(--border);
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+    .pub-card + .pub-card { border-top: 1px solid var(--border); }
+    .pub-card:hover + .pub-card { border-top-color: transparent; }
+
+    .pub-thumb {
+      width: 76px;
+      height: 100px;
+      background: linear-gradient(160deg, #dde6f0 0%, #c8d8e8 100%);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .pub-info {}
+    .pub-title {
+      font-family: var(--font-serif);
+      font-size: 1.01rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .pub-authors {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .pub-authors strong { color: var(--text); font-weight: 600; }
+    .pub-venue {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: .01em;
+    }
+    .pub-venue .conf-badge {
+      display: inline-block;
+      background: var(--accent-lt);
+      border: 1px solid rgba(58,110,168,.2);
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-size: .78rem;
+    }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pub-link {
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all .15s;
+      letter-spacing: .01em;
+    }
+    .pub-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-lt);
+      text-decoration: none;
+    }
+
+    /* ─── Experience / Timeline ─────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-period {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .02em;
+      padding-top: 2px;
+    }
+    .tl-body {}
+    .tl-role {
+      font-weight: 600;
+      font-size: .98rem;
+      color: var(--text);
+      margin-bottom: 1px;
+    }
+    .tl-place {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .tl-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .tl-icon {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    /* ─── Services ──────────────────────────────────────── */
+    .services-text {
+      font-size: .95rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .conf-tag {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 8px;
+      font-size: .8rem;
+      font-weight: 600;
+      margin: 2px 3px 2px 0;
+      color: var(--muted);
+      letter-spacing: .03em;
+    }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 60px;
+      font-size: .82rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-order-swap { order: -1; display: flex; justify-content: center; }
+      .avatar { width: 120px; height: 120px; font-size: 2rem; }
+      .hero-name { font-size: 1.75rem; }
+      .topbar-nav { display: none; }
+      .pub-card { grid-template-columns: 60px 1fr; gap: 14px; }
+      .pub-thumb { width: 60px; height: 80px; }
+      .tl-item { grid-template-columns: 1fr; gap: 4px; }
+      .tl-period { font-size: .78rem; }
+    }
+
+    /* ─── Scroll fade animation ──────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <span class="topbar-name">Zico Xu · 许梓超</span>
+    <nav class="topbar-nav">
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#experience">Experience</a>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero fade-in">
+    <div class="hero-left">
+      <div class="hero-name">Zico Xu</div>
+      <div class="hero-name-cn">许梓超</div>
+      <div class="hero-title">Algorithm Assistant Engineer <span style="color:var(--muted);font-weight:400;">&nbsp;·&nbsp;CYDOO</span></div>
+            <p class="hero-bio">
+        I work as an Algorithm Assistant Engineer at <strong>CYDOO</strong>, focusing on algorithm research.
+      </p>
+    </div>
+    <div class="hero-right avatar-wrap hero-order-swap">
+      <img src="deng.jpeg" class="avatar" style="object-fit:cover; font-size:0;" alt="Zico Xu" />
+    </div>
+  </header>
+
+  <!-- Contact -->
+  <div class="contact-row fade-in">
+    <a class="badge badge-email" href="mailto:zichao.xu@cydoo.ai">
+      <i class="fas fa-envelope"></i> Email
+    </a>
+
+    <a class="badge badge-github" href="https://github.com/Xuzc317" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a class="badge badge-cv" href="cv.pdf" target="_blank">
+      <i class="fas fa-file-alt"></i> CV
+    </a>
+
+
+  </div>
+
+  <!-- News -->
+  <section id="news" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>News</h2>
+      <span class="cn">新闻动态</span>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="news-date">2026.05</span>
+        <span class="news-text">Thrilled to join <strong>CYDOO</strong> as an Algorithm Assistant Engineer!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Selected Achievements</h2>
+      <span class="cn">代表成果</span>
+    </div>
+    <div class="pub-list">
+
+      <!-- Paper 1 -->
+      <div class="pub-card">
+        <div class="pub-thumb">
+          <i class="fas fa-file-lines"></i>
+        </div>
+        <div class="pub-info">
+          <div class="pub-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
+          <div class="pub-authors">..., <strong>Zichao Xu</strong>, ShanHuang</div>
+          <div class="pub-venue"><span class="conf-badge">IMCEC 2024</span> &nbsp;April 16, 2024</div>
+        </div>
+      </div>
+
+      <!-- Software Copyright -->
+      <div class="pub-card">
+        <div class="pub-thumb">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <div class="pub-info">
+          <div class="pub-title">IoT-Based Smart Stereoscopic Agriculture System [HuiNong] V1.0</div>
+          <div class="pub-authors">Beijing Institute of Technology, Zhuhai; ...; <strong>Zichao Xu</strong></div>
+          <div class="pub-venue"><span class="conf-badge">Software Copyright</span> &nbsp;Reg. No.: 2024SR1790888 &nbsp;·&nbsp; 2024.11.14</div>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:.85rem; color:var(--muted); margin-top:16px; padding-left:16px;">
+      More coming soon.
+    </p>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Experience</h2>
+      <span class="cn">教育 / 工作经历</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-period">2026.05 — Now</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>Algorithm Assistant Engineer</div>
+          <div class="tl-place">CYDOO</div>
+          <div class="tl-desc">Focused on algorithms for robotic control.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2025.01 — 2026.01</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>Research Intern</div>
+          <div class="tl-place">BHE Lab</div>
+          <div class="tl-desc">Participated in research tasks for the Key Special Project of Guangdong Provincial Universities in Priority Fields (Project No. 2024ZDZX2097).</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2021.09 — 2025.09</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>B.Eng. in Computer Science and Technology</div>
+          <div class="tl-place">Beijing Institute of Technology, Zhuhai (BITZH)</div>
+          <div class="tl-desc">Advised by Prof. Yan Zhou, BHE Lab.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+<!-- Footer -->
+  <footer>
+    <span>Last updated: May 2026</span>
+    <span>Template inspired by <a href="https://jonbarron.info" target="_blank">Jon Barron</a></span>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 60}ms`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
