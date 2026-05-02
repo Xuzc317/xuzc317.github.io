@@ -172,6 +172,7 @@
       box-shadow: 0 3px 10px rgba(58,110,168,.15);
     }
     .badge-email:hover  { border-color: #c0392b; background: #fdf0ee; color: #c0392b; }
+    .badge-email.copied { border-color: #27ae60; background: #edfaf3; color: #27ae60; }
     .badge-github:hover { border-color: #24292e; background: #f0f0f0; color: #24292e; }
     .badge-cv:hover     { border-color: #27ae60; background: #edfaf3; color: #27ae60; }
 
@@ -449,7 +450,7 @@
       <div class="hero-name-cn">许梓超</div>
       <div class="hero-title">Algorithm Assistant Engineer <span style="color:var(--muted);font-weight:400;">&nbsp;·&nbsp;CYDOO</span></div>
             <p class="hero-bio">
-        I work as an Algorithm Assistant Engineer at <strong>CYDOO</strong>, focusing on algorithm research.
+        I recently joined <strong>CYDOO</strong> as an Algorithm Assistant Engineer. I graduated from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong> with a B.Eng. in Computer Science and Technology. Currently exploring my research direction, I am eager to connect and exchange ideas with scholars and industry practitioners.
       </p>
     </div>
     <div class="hero-right avatar-wrap hero-order-swap">
@@ -459,16 +460,16 @@
 
   <!-- Contact -->
   <div class="contact-row fade-in">
-    <a class="badge badge-email" href="mailto:zichao.xu@cydoo.ai">
-      <i class="fas fa-envelope"></i> Email
-    </a>
+    <span class="badge badge-email" id="email-badge" title="Click to copy">
+      <i class="fas fa-envelope"></i> <span id="email-label">Email</span>
+    </span>
 
     <a class="badge badge-github" href="https://github.com/Xuzc317" target="_blank">
       <i class="fab fa-github"></i> GitHub
     </a>
-    <a class="badge badge-cv" href="cv.pdf" target="_blank">
-      <i class="fas fa-file-alt"></i> CV
-    </a>
+    <span class="badge badge-cv" id="cv-badge">
+      <i class="fas fa-file-alt"></i> <span id="cv-label">CV</span>
+    </span>
 
 
   </div>
@@ -589,6 +590,36 @@
   document.querySelectorAll('.fade-in').forEach((el, i) => {
     el.style.transitionDelay = `${i * 60}ms`;
     observer.observe(el);
+  });
+
+  // Email copy-to-clipboard
+  const emailBadge = document.getElementById('email-badge');
+  const emailLabel = document.getElementById('email-label');
+  const emailAddr = '210104102792@bitzh.edu.cn';
+
+  emailBadge.addEventListener('click', () => {
+    navigator.clipboard.writeText(emailAddr).then(() => {
+      emailLabel.textContent = 'Copied!';
+      emailBadge.classList.add('copied');
+      setTimeout(() => {
+        emailLabel.textContent = 'Email';
+        emailBadge.classList.remove('copied');
+      }, 1800);
+    });
+  });
+
+  // CV not-available reminder
+  const cvBadge = document.getElementById('cv-badge');
+  const cvLabel = document.getElementById('cv-label');
+  cvBadge.addEventListener('click', () => {
+    cvLabel.textContent = 'Not available yet';
+    cvBadge.style.color = 'var(--red)';
+    cvBadge.style.borderColor = 'var(--red)';
+    setTimeout(() => {
+      cvLabel.textContent = 'CV';
+      cvBadge.style.color = '';
+      cvBadge.style.borderColor = '';
+    }, 1800);
   });
 </script>
 
