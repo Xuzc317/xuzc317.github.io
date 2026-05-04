@@ -3,30 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zico Xu — Personal Homepage</title>
+  <title>Zico's home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     /* ─── Reset & Base ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #f9f7f4;
+      --bg:        #faf9f5;
       --surface:   #ffffff;
-      --border:    #e4e0d8;
-      --text:      #1c1a17;
-      --muted:     #6b6560;
+      --surface-2: #f5f0e8;
+      --border:    #e6dfd8;
+      --border-strong: #d5cec5;
+      --text:      #141413;
+      --text-body: #3d3d3a;
+      --muted:     #6c6a64;
+      --muted-soft:#8e8b82;
       --accent:    #3a6ea8;
+      --accent-warm:#cc785c;
       --accent-lt: #edf2f9;
       --accent-dk: #2a5088;
-      --red:       #c0392b;
+      --red:       #c64545;
+      --green:     #27a644;
       --font-sans: 'Source Sans 3', system-ui, sans-serif;
-      --font-serif:'Lora', Georgia, serif;
+      --font-serif: 'Lora', Georgia, serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --radius-sm: 4px;
       --radius:    6px;
-      --shadow:    0 2px 12px rgba(0,0,0,.07);
-      --shadow-lg: 0 6px 24px rgba(0,0,0,.11);
+      --radius-lg: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+      --shadow:    0 2px 12px rgba(0,0,0,.06);
+      --shadow-lg: 0 6px 24px rgba(0,0,0,.09);
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -34,17 +44,19 @@
     body {
       font-family: var(--font-sans);
       background: var(--bg);
-      color: var(--text);
+      color: var(--text-body);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
     a { color: var(--accent); text-decoration: none; transition: color .15s; }
-    a:hover { color: var(--accent-dk); text-decoration: underline; }
+    a:hover { color: var(--accent-dk); }
+
+    strong { color: var(--text); font-weight: 600; }
 
     /* ─── Layout ────────────────────────────────────────── */
     .page {
-      max-width: 900px;
+      max-width: 880px;
       margin: 0 auto;
       padding: 0 24px 80px;
     }
@@ -52,8 +64,8 @@
     /* ─── Top bar ───────────────────────────────────────── */
     .topbar {
       border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      margin-bottom: 52px;
+      padding: 16px 0;
+      margin-bottom: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -61,65 +73,70 @@
     }
     .topbar-name {
       font-family: var(--font-serif);
-      font-size: 1rem;
+      font-size: .95rem;
+      font-weight: 500;
       letter-spacing: .01em;
       color: var(--text);
     }
-    .topbar-nav { display: flex; gap: 20px; font-size: .875rem; color: var(--muted); }
-    .topbar-nav a { color: var(--muted); }
+    .topbar-nav { display: flex; gap: 22px; font-size: .85rem; }
+    .topbar-nav a {
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: .01em;
+      transition: color .15s;
+    }
     .topbar-nav a:hover { color: var(--accent); text-decoration: none; }
 
-    /* ─── Hero / Header ─────────────────────────────────── */
+    /* ─── Hero ──────────────────────────────────────────── */
     .hero {
       display: grid;
       grid-template-columns: 1fr 180px;
-      gap: 40px;
+      gap: 44px;
       align-items: start;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     .hero-name {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -.01em;
+      line-height: 1.15;
+      letter-spacing: -.015em;
       margin-bottom: 4px;
+      color: var(--text);
     }
     .hero-name-cn {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--muted);
       font-weight: 300;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-family: var(--font-sans);
     }
-    .hero-title {
-      font-size: .95rem;
-      font-weight: 600;
+    .hero-identity {
+      font-size: .9rem;
+      font-weight: 500;
       color: var(--accent);
       letter-spacing: .02em;
-      margin-bottom: 2px;
-    }
-    .hero-affil {
-      font-size: .95rem;
-      color: var(--muted);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-bio {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text);
-      max-width: 560px;
+      font-size: .95rem;
+      line-height: 1.85;
+      color: var(--text-body);
+      max-width: 540px;
     }
-    .hero-bio strong { color: var(--accent); font-weight: 600; }
+    .hero-bio + .hero-bio { margin-top: 14px; }
+    .hero-bio em { color: var(--accent); font-style: normal; font-weight: 500; }
 
     /* Avatar */
     .avatar-wrap { display: flex; justify-content: center; }
     .avatar {
-      width: 156px;
-      height: 156px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #3a6ea8 0%, #6fa3d4 50%, #a8c8e8 100%);
+      background: linear-gradient(145deg, #d5cec5 0%, #e6dfd8 50%, #f0ebe4 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -127,40 +144,41 @@
       font-size: 2.6rem;
       color: #fff;
       letter-spacing: .04em;
-      box-shadow: 0 4px 20px rgba(58,110,168,.25);
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
+      border: 3px solid var(--surface);
     }
     .avatar::after {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      box-shadow: inset 0 -4px 12px rgba(0,0,0,.12);
+      box-shadow: inset 0 -4px 12px rgba(0,0,0,.08);
     }
 
-    /* ─── Contact badges ────────────────────────────────── */
+    /* ─── Contact ───────────────────────────────────────── */
     .contact-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 56px;
+      margin-bottom: 60px;
     }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 14px;
+      padding: 6px 15px;
       border-radius: 99px;
       font-size: .82rem;
-      font-weight: 600;
+      font-weight: 500;
       border: 1.5px solid var(--border);
       background: var(--surface);
       color: var(--muted);
       transition: all .18s;
       cursor: pointer;
-      letter-spacing: .02em;
+      letter-spacing: .01em;
     }
     .badge i { font-size: .85em; }
     .badge:hover {
@@ -169,42 +187,85 @@
       color: var(--accent);
       text-decoration: none;
       transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(58,110,168,.15);
+      box-shadow: var(--shadow-sm);
     }
-    .badge-email:hover  { border-color: #c0392b; background: #fdf0ee; color: #c0392b; }
-    .badge-email.copied { border-color: #27ae60; background: #edfaf3; color: #27ae60; }
+    .badge-email:hover  { border-color: var(--accent-warm); background: #fdf5f2; color: var(--accent-warm); }
+    .badge-email.copied { border-color: var(--green); background: #edfaf3; color: var(--green); }
     .badge-github:hover { border-color: #24292e; background: #f0f0f0; color: #24292e; }
-    .badge-cv:hover     { border-color: #27ae60; background: #edfaf3; color: #27ae60; }
+    .badge-cv:hover     { border-color: var(--green); background: #edfaf3; color: var(--green); }
 
-    /* ─── Section label ─────────────────────────────────── */
-    .section { margin-bottom: 52px; }
+    /* ─── Sections ──────────────────────────────────────── */
+    .section { margin-bottom: 60px; }
     .section-head {
       display: flex;
       align-items: baseline;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       padding-bottom: 10px;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
     .section-head h2 {
       font-family: var(--font-sans);
-      font-size: .72rem;
+      font-size: .7rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
+      letter-spacing: .14em;
+      color: var(--muted-soft);
     }
     .section-head .cn {
-      font-size: .82rem;
-      color: var(--border);
+      font-size: .8rem;
+      color: var(--border-strong);
       font-weight: 400;
     }
     .section-head .accent-dot {
-      width: 6px; height: 6px;
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0;
       margin-bottom: 2px;
+    }
+
+    /* ─── Research Interests ────────────────────────────── */
+    .ri-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .ri-col {}
+    .ri-label {
+      font-size: .68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .ri-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .ri-list li {
+      font-size: .9rem;
+      line-height: 1.6;
+      color: var(--text-body);
+      padding-left: 16px;
+      position: relative;
+    }
+    .ri-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .65em;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+    .ri-list li strong { font-weight: 600; }
+    .ri-dir {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      border-left: 2px solid var(--accent-warm);
+      padding: 4px 0 4px 16px;
+      margin-top: 24px;
+      font-style: italic;
     }
 
     /* ─── News ──────────────────────────────────────────── */
@@ -213,7 +274,7 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       padding-right: 6px;
     }
     .news-list::-webkit-scrollbar { width: 4px; }
@@ -224,103 +285,116 @@
       display: flex;
       gap: 14px;
       align-items: baseline;
-      font-size: .92rem;
+      font-size: .9rem;
     }
     .news-date {
-      font-family: 'Source Sans 3', monospace;
-      font-size: .78rem;
-      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      font-weight: 500;
       color: var(--accent);
       white-space: nowrap;
       background: var(--accent-lt);
-      padding: 1px 7px;
-      border-radius: 4px;
-      letter-spacing: .03em;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      letter-spacing: .02em;
     }
-    .news-text { color: var(--text); line-height: 1.6; }
-    .news-text a { font-weight: 600; }
+    .news-text { color: var(--text-body); line-height: 1.6; }
 
-    /* ─── Publications ──────────────────────────────────── */
-    .pub-list { display: flex; flex-direction: column; gap: 0; }
+    /* ─── Work / Publications ───────────────────────────── */
+    .work-list { display: flex; flex-direction: column; }
 
-    .pub-card {
-      display: grid;
-      grid-template-columns: 76px 1fr;
-      gap: 20px;
-      padding: 20px 16px;
+    .work-card {
+      padding: 22px 18px;
       border-radius: var(--radius);
       transition: all .2s;
       border: 1px solid transparent;
     }
-    .pub-card:hover {
+    .work-card:hover {
       background: var(--surface);
       border-color: var(--border);
       box-shadow: var(--shadow);
-      transform: translateY(-1px);
     }
-    .pub-card + .pub-card { border-top: 1px solid var(--border); }
-    .pub-card:hover + .pub-card { border-top-color: transparent; }
+    .work-card + .work-card { border-top: 1px solid var(--border); }
+    .work-card:hover + .work-card { border-top-color: transparent; }
 
-    .pub-thumb {
-      width: 76px;
-      height: 100px;
-      background: linear-gradient(160deg, #dde6f0 0%, #c8d8e8 100%);
-      border-radius: 4px;
-      border: 1px solid var(--border);
+    .work-card-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 1.3rem;
-      flex-shrink: 0;
+      gap: 10px;
+      margin-bottom: 8px;
     }
-    .pub-info {}
-    .pub-title {
+    .work-tag {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-lt);
+      color: var(--accent);
+      border: 1px solid rgba(58,110,168,.15);
+    }
+    .work-tag-project {
+      background: #fdf5f2;
+      color: var(--accent-warm);
+      border: 1px solid rgba(204,120,92,.2);
+    }
+    .work-title {
       font-family: var(--font-serif);
-      font-size: 1.01rem;
+      font-size: 1rem;
       font-weight: 600;
       line-height: 1.4;
-      margin-bottom: 5px;
       color: var(--text);
-    }
-    .pub-authors {
-      font-size: .88rem;
-      color: var(--muted);
       margin-bottom: 4px;
+    }
+    .work-meta {
+      font-size: .84rem;
+      color: var(--muted);
+      margin-bottom: 8px;
       line-height: 1.5;
     }
-    .pub-authors strong { color: var(--text); font-weight: 600; }
-    .pub-venue {
-      font-size: .84rem;
+    .work-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 680px;
+    }
+    .work-desc .highlight { color: var(--text); font-weight: 500; }
+    .work-desc-p { margin-bottom: 10px; }
+    .work-desc-p:last-child { margin-bottom: 0; }
+    .work-venue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .82rem;
       font-weight: 600;
       color: var(--accent);
-      margin-bottom: 10px;
       letter-spacing: .01em;
     }
-    .pub-venue .conf-badge {
+    .work-venue .venue-badge {
       display: inline-block;
       background: var(--accent-lt);
       border: 1px solid rgba(58,110,168,.2);
-      padding: 1px 8px;
-      border-radius: 4px;
-      font-size: .78rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-size: .76rem;
     }
-    .pub-links { display: flex; flex-wrap: wrap; gap: 6px; }
-    .pub-link {
-      font-size: .78rem;
-      font-weight: 600;
-      padding: 2px 9px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all .15s;
-      letter-spacing: .01em;
+
+    .work-result-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
     }
-    .pub-link:hover {
-      border-color: var(--accent);
+    .work-stat {
+      font-family: var(--font-mono);
+      font-size: .8rem;
       color: var(--accent);
       background: var(--accent-lt);
-      text-decoration: none;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
     }
 
     /* ─── Experience / Timeline ─────────────────────────── */
@@ -328,61 +402,42 @@
     .tl-item {
       display: grid;
       grid-template-columns: 110px 1fr;
-      gap: 20px;
-      padding: 18px 0;
+      gap: 22px;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
     }
     .tl-item:last-child { border-bottom: none; }
     .tl-period {
-      font-size: .8rem;
-      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      font-weight: 500;
       color: var(--muted);
       letter-spacing: .02em;
       padding-top: 2px;
     }
-    .tl-body {}
     .tl-role {
       font-weight: 600;
-      font-size: .98rem;
+      font-size: .95rem;
       color: var(--text);
-      margin-bottom: 1px;
+      margin-bottom: 2px;
     }
     .tl-place {
-      font-size: .88rem;
+      font-size: .85rem;
       color: var(--muted);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .tl-desc {
-      font-size: .88rem;
+      font-size: .86rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .tl-icon {
       display: inline-block;
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--accent);
-      margin-right: 4px;
+      margin-right: 5px;
       vertical-align: middle;
-    }
-
-    /* ─── Services ──────────────────────────────────────── */
-    .services-text {
-      font-size: .95rem;
-      color: var(--text);
-      line-height: 1.9;
-    }
-    .conf-tag {
-      display: inline-block;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1px 8px;
-      font-size: .8rem;
-      font-weight: 600;
-      margin: 2px 3px 2px 0;
-      color: var(--muted);
-      letter-spacing: .03em;
     }
 
     /* ─── Footer ────────────────────────────────────────── */
@@ -390,8 +445,8 @@
       border-top: 1px solid var(--border);
       padding-top: 24px;
       margin-top: 60px;
-      font-size: .82rem;
-      color: var(--muted);
+      font-size: .8rem;
+      color: var(--muted-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -401,8 +456,58 @@
     footer a { color: var(--muted); }
     footer a:hover { color: var(--accent); }
 
+    /* ─── Growth & Thinking ─────────────────────────────── */
+    .growth-stages { display: flex; flex-direction: column; }
+    .growth-stage {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .growth-stage:last-child { border-bottom: none; }
+    .growth-stage-num {
+      font-family: var(--font-mono);
+      font-size: .74rem;
+      font-weight: 500;
+      color: var(--accent);
+      padding-top: 1px;
+      letter-spacing: .02em;
+    }
+    .growth-stage-label {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .growth-stage-desc {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── Technical Skills ──────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px 40px;
+    }
+    .skills-cat-label {
+      font-size: .68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .skills-cat-list {
+      font-size: .88rem;
+      color: var(--text-body);
+      line-height: 1.75;
+    }
+
     /* ─── Responsive ────────────────────────────────────── */
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .hero {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -410,14 +515,16 @@
       .hero-order-swap { order: -1; display: flex; justify-content: center; }
       .avatar { width: 120px; height: 120px; font-size: 2rem; }
       .hero-name { font-size: 1.75rem; }
+      .hero-bio { font-size: .9rem; }
       .topbar-nav { display: none; }
-      .pub-card { grid-template-columns: 60px 1fr; gap: 14px; }
-      .pub-thumb { width: 60px; height: 80px; }
+      .ri-grid { grid-template-columns: 1fr; gap: 20px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 18px; }
+      .growth-stage { grid-template-columns: 72px 1fr; gap: 12px; }
       .tl-item { grid-template-columns: 1fr; gap: 4px; }
-      .tl-period { font-size: .78rem; }
+      .tl-period { font-size: .76rem; }
     }
 
-    /* ─── Scroll fade animation ──────────────────────────── */
+    /* ─── Scroll fade ───────────────────────────────────── */
     .fade-in {
       opacity: 0;
       transform: translateY(18px);
@@ -437,9 +544,10 @@
   <div class="topbar">
     <span class="topbar-name">Zico Xu · 许梓超</span>
     <nav class="topbar-nav">
-      <a href="#news">News</a>
-      <a href="#publications">Publications</a>
-      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a href="#work">Work</a>
+      <a href="#growth">Growth</a>
+      <a href="#skills">Skills</a>
     </nav>
   </div>
 
@@ -448,9 +556,13 @@
     <div class="hero-left">
       <div class="hero-name">Zico Xu</div>
       <div class="hero-name-cn">许梓超</div>
-      <div class="hero-title">Algorithm Assistant Engineer <span style="color:var(--muted);font-weight:400;">&nbsp;·&nbsp;CYDOO</span></div>
-            <p class="hero-bio">
-        I recently joined <strong>CYDOO</strong> as an Algorithm Assistant Engineer after graduating from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong> with a B.Eng. in Computer Science and Technology. My earlier work focused on computer audition and deep learning. I position myself as an <strong>engineering-driven AI application developer</strong> and a <strong>research-oriented engineer</strong>, with full-stack capability spanning problem discovery, system re-architecture, method design, and experimental validation. Skilled at leveraging AI tools to ship complex projects efficiently, I am gradually developing my own framework for technical judgment. Currently deepening into <strong>AI agents, AI algorithms, and robot motion control</strong>, and I am always open to exchanging ideas with scholars and industry peers.
+      <div class="hero-identity">Algorithm Assistant Engineer &nbsp;·&nbsp; CYDOO</div>
+
+      <p class="hero-bio">
+        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. My previous research focused on computer audition and speech signal processing.
+      </p>
+      <p class="hero-bio">
+        I will join <strong>CYDOO</strong>, a robotics company, in an algorithm role, while independently exploring AI agents and AI system design. My trajectory converges toward the intersection of <strong>AI algorithms</strong> and <strong>AI systems</strong> — understanding not just what works, but why, and under what conditions.
       </p>
     </div>
     <div class="hero-right avatar-wrap hero-order-swap">
@@ -463,15 +575,12 @@
     <span class="badge badge-email" id="email-badge" title="Click to copy">
       <i class="fas fa-envelope"></i> <span id="email-label">Email</span>
     </span>
-
     <a class="badge badge-github" href="https://github.com/Xuzc317" target="_blank">
       <i class="fab fa-github"></i> GitHub
     </a>
     <span class="badge badge-cv" id="cv-badge">
       <i class="fas fa-file-alt"></i> <span id="cv-label">CV</span>
     </span>
-
-
   </div>
 
   <!-- News -->
@@ -479,7 +588,7 @@
     <div class="section-head">
       <div class="accent-dot"></div>
       <h2>News</h2>
-      <span class="cn">新闻动态</span>
+      <span class="cn">动态</span>
     </div>
     <div class="news-list">
       <div class="news-item">
@@ -489,43 +598,126 @@
     </div>
   </section>
 
-  <!-- Publications -->
-  <section id="publications" class="section fade-in">
+  <!-- Selected Work -->
+  <section id="work" class="section fade-in">
     <div class="section-head">
       <div class="accent-dot"></div>
-      <h2>Selected Achievements</h2>
-      <span class="cn">代表成果</span>
+      <h2>Selected Work</h2>
+      <span class="cn">代表工作</span>
     </div>
-    <div class="pub-list">
 
-      <!-- Paper 1 -->
-      <div class="pub-card">
-        <div class="pub-thumb">
-          <i class="fas fa-file-lines"></i>
+    <div class="work-list">
+
+      <!-- Research Project: System Reconstruction Case Study -->
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag work-tag-project">Research Project</span>
         </div>
-        <div class="pub-info">
-          <div class="pub-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
-          <div class="pub-authors">..., <strong>Zichao Xu</strong>, ShanHuang</div>
-          <div class="pub-venue"><span class="conf-badge">IMCEC 2024</span> &nbsp;April 16, 2024</div>
+        <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
+        <div class="work-desc">
+          <p class="work-desc-p">Reproduced a published model reporting <span class="highlight">86.82% accuracy</span>. Discovered <span class="highlight">63% speaker overlap</span> between train and test sets — systemic data leakage inflating all reported results. After enforcing strict speaker independence, accuracy collapsed to <span class="highlight">~35%</span>, near chance. Root cause: mean-pooled handcrafted features (162-dim) destroyed temporal structure, making Conv1d slide on the feature-concatenation axis rather than time — the architecture was mathematically incapable of temporal modeling.</p>
+          <p class="work-desc-p">Rebuilt the full pipeline from data to evaluation. Switched to <span class="highlight">WavLM frame-level SSL features</span> (768-dim × T, preserving the true time axis). Designed <span class="highlight">Prosody-guided Temporal Importance Pooling</span> — using children's F0 and energy contours to weight frames by importance, replacing blind mean pooling. Conducted negative augmentation experiments, quantifying distribution shift via <span class="highlight">Fréchet Distance</span>.</p>
+          <p class="work-desc-p"><span class="highlight">80.85% test accuracy</span> under strict 6:2:2 speaker-independent protocol, +30pp over strict MFCC baseline (50.2%), +5pp over published C-BESD baseline (76%). Prosody Pooling is the dominant driver (+2.24pp); Adapter contributes only ~0.5pp. Augmentation confirmed FD ∝ 1/Accuracy — distribution shift quantitatively predicts performance degradation. Cross-language transfer (English↔Telugu) largely fails (19–28%), identifying language shift as a harder problem than acoustic shift.</p>
         </div>
+        <div class="work-result-row">
+          <span class="work-stat">35% → 80.85% UAR</span>
+          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">6:2:2 speaker-independent</span>
+          <span class="work-stat">Prosody Pooling +2.24pp</span>
+        </div>
+      </div>
+
+      <!-- RAG + Agent System -->
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag work-tag-project">System Building</span>
+        </div>
+        <div class="work-title">Enterprise Knowledge Base RAG + Agent System</div>
+        <div class="work-desc">
+          <p class="work-desc-p">Built an end-to-end retrieval-augmented generation system for enterprise document Q&A. Pipeline spans <span class="highlight">document chunking, embedding, vector retrieval, prompt assembly, and LLM generation</span>. Extended with agent tool-calling capabilities — summarization, task extraction, and structured querying — demonstrating integration across embedding, retrieval, API orchestration, and LLM inference.</p>
+        </div>
+      </div>
+
+      <!-- Paper -->
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag">Publication</span>
+          <span class="work-venue"><span class="venue-badge">IMCEC 2024</span> April 16, 2024</span>
+        </div>
+        <div class="work-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
+        <div class="work-meta">..., <strong>Zichao Xu</strong>, ShanHuang</div>
       </div>
 
       <!-- Software Copyright -->
-      <div class="pub-card">
-        <div class="pub-thumb">
-          <i class="fas fa-certificate"></i>
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag">Software</span>
+          <span class="work-venue">Reg. No. 2024SR1790888 &nbsp;·&nbsp; 2024.11.14</span>
         </div>
-        <div class="pub-info">
-          <div class="pub-title">IoT-Based Smart Stereoscopic Agriculture System [HuiNong] V1.0</div>
-          <div class="pub-authors">Beijing Institute of Technology, Zhuhai; ...; <strong>Zichao Xu</strong></div>
-          <div class="pub-venue"><span class="conf-badge">Software Copyright</span> &nbsp;Reg. No.: 2024SR1790888 &nbsp;·&nbsp; 2024.11.14</div>
-        </div>
+        <div class="work-title">IoT-Based Smart Stereoscopic Agriculture System [HuiNong] V1.0</div>
+        <div class="work-meta">Beijing Institute of Technology, Zhuhai; ...; <strong>Zichao Xu</strong></div>
       </div>
 
     </div>
-    <p style="font-size:.85rem; color:var(--muted); margin-top:16px; padding-left:16px;">
-      More coming soon.
+  </section>
+
+  <!-- Research Interests -->
+  <section id="research" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Research Interests</h2>
+      <span class="cn">研究方向</span>
+    </div>
+
+    <div class="ri-grid">
+      <div class="ri-col">
+        <div class="ri-label">Current Exploration</div>
+        <ul class="ri-list">
+          <li><strong>AI Algorithms</strong> — representation learning, sequential decision-making, structured prediction</li>
+          <li><strong>AI Systems</strong> — efficient inference, model deployment, system-algorithm co-design</li>
+          <li><strong>Robot Motion Control</strong> — planning and control for robotic platforms</li>
+        </ul>
+      </div>
+      <div class="ri-col">
+        <div class="ri-label">Previous Focus</div>
+        <ul class="ri-list">
+          <li><strong>Computer Audition</strong> — speech and audio representation, deep learning for acoustic tasks</li>
+          <li><strong>Speech Security</strong> — encryption algorithms, information hiding</li>
+          <li><strong>Affective Computing</strong> — speech emotion recognition, distribution shift, speaker generalization</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ri-dir">
+      Currently converging from single-domain applications toward generalizable methods. The core question: how do we build AI systems that are both capable and reliably understood?
     </p>
+  </section>
+
+  <!-- Technical Skills -->
+  <section id="skills" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Technical Skills</h2>
+      <span class="cn">技术能力</span>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skills-cat">
+        <div class="skills-cat-label">AI Agent &amp; LLM Tools</div>
+        <div class="skills-cat-list">Claude Code, Codex, Cursor, ChatGPT, Gemini, DeepSeek — active across research and development workflows. Experienced in AI-augmented development: human-led decisions, AI-assisted execution.</div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">Deep Learning &amp; Infrastructure</div>
+        <div class="skills-cat-list">Python, PyTorch, CUDA/GPU training, Linux, Git. Speech and temporal data modeling with Librosa. Model deployment via ONNX. Data augmentation and few-shot learning.</div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">AI Application Development</div>
+        <div class="skills-cat-list">RAG, Agent, and tool-calling architectures. Prompt engineering. Vibe Coding and Harness Engineering patterns. End-to-end AI system integration.</div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">Reinforcement Learning &amp; Embodied AI</div>
+        <div class="skills-cat-list">PPO and policy optimization methods. Isaac Gym and Mujoco simulation for robot control policy training. RL fundamentals and practical implementation.</div>
+      </div>
+    </div>
   </section>
 
   <!-- Experience -->
@@ -533,16 +725,16 @@
     <div class="section-head">
       <div class="accent-dot"></div>
       <h2>Experience</h2>
-      <span class="cn">教育 / 工作经历</span>
+      <span class="cn">经历</span>
     </div>
     <div class="timeline">
 
       <div class="tl-item">
-        <div class="tl-period">2026.05 — Now</div>
+        <div class="tl-period">2026.05 —</div>
         <div class="tl-body">
           <div class="tl-role"><span class="tl-icon"></span>Algorithm Assistant Engineer</div>
-          <div class="tl-place">CYDOO</div>
-          <div class="tl-desc">Focused on algorithms for robotic control.</div>
+          <div class="tl-place">CYDOO (Robotics), ShenZhen</div>
+          <div class="tl-desc">Joining the algorithm team at a robotics company. Looking forward to this new chapter.</div>
         </div>
       </div>
 
@@ -550,28 +742,88 @@
         <div class="tl-period">2025.01 — 2026.01</div>
         <div class="tl-body">
           <div class="tl-role"><span class="tl-icon"></span>Research Intern</div>
-          <div class="tl-place">BHE Lab</div>
-          <div class="tl-desc">Participated in research tasks for the Key Special Project of Guangdong Provincial Universities in Priority Fields (Project No. 2024ZDZX2097).</div>
+          <div class="tl-place">Brain Health Engineering (BHE) Lab, BITZH</div>
+          <div class="tl-desc">Contributed to the Guangdong Provincial Key Special Project (No. 2024ZDZX2097). Participated in research projects on speech and audio processing. Co-authored a conference paper (under submission, 2026).</div>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-period">2021.09 — 2025.09</div>
         <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>B.Eng. in Computer Science and Technology</div>
+          <div class="tl-role"><span class="tl-icon"></span>B.Eng. Computer Science and Technology</div>
           <div class="tl-place">Beijing Institute of Technology, Zhuhai (BITZH)</div>
-          <div class="tl-desc">Advised by Prof. Yan Zhou, BHE Lab.</div>
+          <div class="tl-desc">Research focus: computer audition, signal processing, and deep learning. Joined the Brain Health Engineering (BHE) Lab where Associate Prof. Zhou works.</div>
         </div>
       </div>
 
     </div>
   </section>
 
+  <!-- Growth & Thinking -->
+  <section id="growth" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Growth &amp; Thinking</h2>
+      <span class="cn">成长与思考</span>
+    </div>
 
-<!-- Footer -->
+    <div class="growth-stages">
+      <div class="growth-stage">
+        <div class="growth-stage-num">Pre-2021</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">Before university</div>
+          <div class="growth-stage-desc">Knowledge came from textbooks and teachers. Learning meant absorbing what was assigned. I was curious about technology but had no concept of independent inquiry — "research" was something that happened elsewhere.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2021-2022</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">First major: Automation</div>
+          <div class="growth-stage-desc">Entered BITZH as an Automation major. University felt like an extension of high school — attend lectures, complete assignments. The routine was comfortable but increasingly felt like someone else's path.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2022-2023</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">A bold move: Computer Science</div>
+          <div class="growth-stage-desc">Realized my real interest lay in coding, algorithms, and AI. Transferred to Computer Science and Technology in the first semester of freshman year. Course projects became my first exposure to problems requiring answers beyond the syllabus. Self-directed learning shifted from necessity to habit.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2023-2024</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">A fateful encounter</div>
+          <div class="growth-stage-desc">Took Associate Prof. Zhou's Speech Recognition course and served as course representative. Consistent engagement — in and after class — earned her trust. She invited me to join the AI &amp; Embedded Lab, my first entry into a research environment.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2025-2026</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">Research internship — BHE Lab</div>
+          <div class="growth-stage-desc">Senior year: university restructuring led Associate Prof. Zhou to the Brain Health Engineering (BHE) Lab at BIT. She invited me for a research internship. Under her guidance, I contributed to a provincial-level key project and chose a focused direction for my graduation thesis. Transitioned from coursework-based learning to independent, in-depth research.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2026-Now</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">Research Assistant — BHE Lab</div>
+          <div class="growth-stage-desc">After graduation, continued at BHE Lab as a research assistant. Currently fixing the data leakage problem discovered in earlier experimental work (63% speaker overlap), re-running experiments under corrected protocols, organizing experimental data, and drafting manuscripts.</div>
+        </div>
+      </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2026-Now</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">From school to society: first job at CYDOO</div>
+          <div class="growth-stage-desc">Navigating the shift from process-oriented research to result-driven engineering. Continuing to develop research skills alongside industry preparation. Learning when to apply research thinking and when to ship. Looking forward.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <span>Last updated: May 2026</span>
-    <span>Template inspired by <a href="https://jonbarron.info" target="_blank">Jon Barron</a></span>
+    <span>Design references: <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank">awesome-design-md</a> &amp; <a href="https://jonbarron.info" target="_blank">Jon Barron</a></span>
   </footer>
 
 </div>
