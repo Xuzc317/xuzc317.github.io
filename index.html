@@ -556,13 +556,13 @@
     <div class="hero-left">
       <div class="hero-name">Zico Xu</div>
       <div class="hero-name-cn">许梓超</div>
-      <div class="hero-identity">Algorithm Assistant Engineer &nbsp;·&nbsp; CYDOO</div>
+      <div class="hero-identity">Remote Research Assistant</div>
 
       <p class="hero-bio">
-        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. My previous research focused on computer audition and speech signal processing.
+        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. I am currently a Remote Research Assistant at the Brain Health Engineering (BHE) Lab, working on speech emotion recognition and distribution shift.
       </p>
       <p class="hero-bio">
-        I will join <strong>CYDOO</strong>, a robotics company, in an algorithm role, while independently exploring AI agents and AI system design. My trajectory converges toward the intersection of <strong>AI algorithms</strong> and <strong>AI systems</strong> — understanding not just what works, but why, and under what conditions.
+        I have a strong interest in <strong>AI agent technologies</strong> and <strong>embodied intelligence</strong>, converging toward the intersection of algorithms and systems — understanding not just what works, but why, and under what conditions.
       </p>
     </div>
     <div class="hero-right avatar-wrap hero-order-swap">
@@ -592,6 +592,10 @@
     </div>
     <div class="news-list">
       <div class="news-item">
+        <span class="news-date">2026.06</span>
+        <span class="news-text">Left <strong>CYDOO</strong> by mutual agreement due to divergence between company trajectory and personal career direction.</span>
+      </div>
+      <div class="news-item">
         <span class="news-date">2026.05</span>
         <span class="news-text">Thrilled to join <strong>CYDOO</strong> as an Algorithm Assistant Engineer!</span>
       </div>
@@ -612,17 +616,36 @@
       <div class="work-card">
         <div class="work-card-header">
           <span class="work-tag work-tag-project">Research Project</span>
+          <span class="work-venue"><span class="venue-badge">2026.01 — Present</span></span>
         </div>
         <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
         <div class="work-desc">
-          <p class="work-desc-p">Reproduced a published model reporting <span class="highlight">86.82% accuracy</span>. Discovered <span class="highlight">63% speaker overlap</span> between train and test sets — systemic data leakage inflating all reported results. After enforcing strict speaker independence, accuracy collapsed to <span class="highlight">~35%</span>, near chance. Root cause: mean-pooled handcrafted features (162-dim) destroyed temporal structure, making Conv1d slide on the feature-concatenation axis rather than time — the architecture was mathematically incapable of temporal modeling.</p>
-          <p class="work-desc-p">Rebuilt the full pipeline from data to evaluation. Switched to <span class="highlight">WavLM frame-level SSL features</span> (768-dim × T, preserving the true time axis). Designed <span class="highlight">Prosody-guided Temporal Importance Pooling</span> — using children's F0 and energy contours to weight frames by importance, replacing blind mean pooling. Conducted negative augmentation experiments, quantifying distribution shift via <span class="highlight">Fréchet Distance</span>.</p>
-          <p class="work-desc-p"><span class="highlight">80.85% test accuracy</span> under strict 6:2:2 speaker-independent protocol, +30pp over strict MFCC baseline (50.2%), +5pp over published C-BESD baseline (76%). Prosody Pooling is the dominant driver (+2.24pp); Adapter contributes only ~0.5pp. Augmentation confirmed FD ∝ 1/Accuracy — distribution shift quantitatively predicts performance degradation. Cross-language transfer (English↔Telugu) largely fails (19–28%), identifying language shift as a harder problem than acoustic shift.</p>
+          <p class="work-desc-p">Reproduced a published model reporting <span class="highlight">86.82% accuracy</span>. Discovered <span class="highlight">63% speaker overlap</span> between train and test sets — systemic data leakage inflating all reported results. After enforcing strict speaker-independent partitioning (MD5 hash, zero-leakage assertion), accuracy collapsed to <span class="highlight">~35%</span>, near chance. Root cause: mean-pooled handcrafted features (162-dim) destroyed temporal structure, making Conv1d slide on the feature-concatenation axis rather than time — the architecture was mathematically incapable of temporal modeling.</p>
+          <p class="work-desc-p">Rebuilt a <span class="highlight">distribution-driven three-module framework</span> (Data Pipeline → WavLM Backbone → Temporal Pooling). Adopted <span class="highlight">WavLM Base+ frame-level SSL features</span> (768-dim × T) with learnable 12-layer fusion weights. Designed <span class="highlight">Prosody-guided Temporal Importance Pooling</span> — using children's F0 and energy contours to weight frames, replacing blind mean pooling. Quantified distribution shift via <span class="highlight">Fréchet Distance (FD)</span> and <span class="highlight">SMMD</span>, establishing FD ∝ 1/Accuracy as a predictive relationship.</p>
+          <p class="work-desc-p"><span class="highlight">92.78% test WA</span> on C-BESD under strict 6:2:2 speaker-independent protocol (Self-Attention pooling). Prosody Pooling achieves 91.30% WA with stronger interpretability (APC=0.718). Cross-corpus experiments reveal distribution shift boundaries: IEMOCAP (FD=7.20, 58.67% WA), FAU Aibo (FD=8.50, 66.36% WA in-domain, 19.56% zero-shot). Multi-seed robustness verified (65.15%±1.12 on FAU). Manuscript submitted.</p>
         </div>
         <div class="work-result-row">
-          <span class="work-stat">35% → 80.85% UAR</span>
+          <span class="work-stat">92.78% WA (C-BESD)</span>
           <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">6:2:2 speaker-independent</span>
-          <span class="work-stat">Prosody Pooling +2.24pp</span>
+          <span class="work-stat">FD ∝ 1/Accuracy</span>
+          <span class="work-stat">Prosody Pooling APC=0.718</span>
+        </div>
+      </div>
+
+      <!-- SMDSL: Spatial-Motion DSL -->
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag work-tag-project">Research Project</span>
+          <span class="work-venue"><span class="venue-badge">2026.05 — 2026.06</span></span>
+        </div>
+        <div class="work-title">SMDSL: A Domain-Specific Language for Embodied Intelligence Spatial-Motion Modeling</div>
+        <div class="work-desc">
+          <p class="work-desc-p">Designed and prototyped a <span class="highlight">domain-specific language (DSL)</span> for describing spatial configurations and motion primitives in embodied AI scenarios. The DSL provides a structured, composable syntax to specify 3D spatial relationships, robotic motion trajectories, and action sequences — bridging the gap between high-level task descriptions and low-level robot control commands.</p>
+          <p class="work-desc-p">Built a <span class="highlight">parsing and execution demo</span> that translates DSL scripts into actionable robot instructions. Explored the design space of spatial-action abstraction layers, focusing on expressiveness, composability, and human readability. The DSL targets complex embodied tasks where spatial reasoning and motion planning are tightly coupled.</p>
+        </div>
+        <div class="work-result-row">
+          <span class="work-stat">DSL Design &amp; Prototype</span>
+          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Demo Implementation</span>
         </div>
       </div>
 
@@ -672,9 +695,9 @@
       <div class="ri-col">
         <div class="ri-label">Current Exploration</div>
         <ul class="ri-list">
-          <li><strong>AI Algorithms</strong> — representation learning, sequential decision-making, structured prediction</li>
-          <li><strong>AI Systems</strong> — efficient inference, model deployment, system-algorithm co-design</li>
-          <li><strong>Robot Motion Control</strong> — planning and control for robotic platforms</li>
+          <li><strong>AI Agent Technologies</strong> — tool-use architectures, multi-agent orchestration, agent-platform integration</li>
+          <li><strong>Embodied Intelligence</strong> — spatial-motion DSL, robot control, simulation-to-real transfer</li>
+          <li><strong>AI Systems</strong> — efficient inference, model deployment, algorithm-system co-design</li>
         </ul>
       </div>
       <div class="ri-col">
@@ -688,7 +711,7 @@
     </div>
 
     <p class="ri-dir">
-      Currently converging from single-domain applications toward generalizable methods. The core question: how do we build AI systems that are both capable and reliably understood?
+      Currently converging from single-domain speech research toward generalizable methods in agent systems and embodied intelligence. The core question: how do we build AI systems that are both capable and reliably understood?
     </p>
   </section>
 
@@ -730,25 +753,34 @@
     <div class="timeline">
 
       <div class="tl-item">
-        <div class="tl-period">2026.05 —</div>
+        <div class="tl-period">2026.05 — 2026.06</div>
         <div class="tl-body">
           <div class="tl-role"><span class="tl-icon"></span>Algorithm Assistant Engineer</div>
           <div class="tl-place">CYDOO (Robotics), ShenZhen</div>
-          <div class="tl-desc">Joining the algorithm team at a robotics company. Looking forward to this new chapter.</div>
+          <div class="tl-desc">Thrilled to join the CYDOO team and collaborate with like-minded colleagues on cutting-edge AI technologies — from research to rapid prototyping. Led or contributed to: SMDSL (spatial-motion DSL for embodied intelligence), CAD parsing for Foxconn AVG factories, agent platform development (To B), and Realman robot control (ROS 1 chassis control, teaching-pendant, upper-arm manipulation, gripper control). Departed by mutual agreement due to divergence between personal career direction and company roadmap.</div>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-period">2025.01 — 2026.01</div>
+        <div class="tl-period">2025.06 — Present</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>Remote Research Assistant</div>
+          <div class="tl-place">Brain Health Engineering (BHE) Lab, BIT</div>
+          <div class="tl-desc">Continued at BHE Lab remotely after graduation. Contributed to the Guangdong Provincial Key Special Project. Currently leading the distribution-driven child speech emotion recognition project — fixing data leakage, rebuilding the full pipeline, and drafting manuscripts for submission; co-authoring a conference paper with the team. Independently exploring AI agent technologies and embodied intelligence.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2025.01 — 2025.06</div>
         <div class="tl-body">
           <div class="tl-role"><span class="tl-icon"></span>Research Intern</div>
-          <div class="tl-place">Brain Health Engineering (BHE) Lab, BITZH</div>
-          <div class="tl-desc">Contributed to the Guangdong Provincial Key Special Project (No. 2024ZDZX2097). Participated in research projects on speech and audio processing. Co-authored a conference paper (under submission, 2026).</div>
+          <div class="tl-place">Brain Health Engineering (BHE) Lab, BIT</div>
+          <div class="tl-desc">Joined the lab and systematically learned the fundamentals of scientific research — literature review, experimental design, and academic writing. Took on hands-on tasks including data cleaning, dataset preprocessing, baseline reproduction, and preliminary model training. The primary contribution was participating in Associate Prof. Zhou's child speech emotion recognition project, conducting algorithm research on speech representation learning and emotion classification under real-world acoustic conditions.</div>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-period">2021.09 — 2025.09</div>
+        <div class="tl-period">2021.09 — 2025.06</div>
         <div class="tl-body">
           <div class="tl-role"><span class="tl-icon"></span>B.Eng. Computer Science and Technology</div>
           <div class="tl-place">Beijing Institute of Technology, Zhuhai (BITZH)</div>
@@ -797,24 +829,24 @@
         </div>
       </div>
       <div class="growth-stage">
-        <div class="growth-stage-num">2025-2026</div>
+        <div class="growth-stage-num">2025.01-06</div>
         <div class="growth-stage-body">
           <div class="growth-stage-label">Research internship — BHE Lab</div>
-          <div class="growth-stage-desc">Senior year: university restructuring led Associate Prof. Zhou to the Brain Health Engineering (BHE) Lab at BIT. She invited me for a research internship. Under her guidance, I contributed to a provincial-level key project and chose a focused direction for my graduation thesis. Transitioned from coursework-based learning to independent, in-depth research.</div>
+          <div class="growth-stage-desc">Senior year: university restructuring led Associate Prof. Zhou to the Brain Health Engineering (BHE) Lab at BIT. She invited me for a research internship. Within the Audio Intelligent Medicine Research Group, I contributed to a provincial-level key project and chose a focused direction for my graduation thesis. Transitioned from coursework-based learning to independent, in-depth research.</div>
         </div>
       </div>
       <div class="growth-stage">
-        <div class="growth-stage-num">2026-Now</div>
+        <div class="growth-stage-num">2025.06-Now</div>
         <div class="growth-stage-body">
-          <div class="growth-stage-label">Research Assistant — BHE Lab</div>
-          <div class="growth-stage-desc">After graduation, continued at BHE Lab as a research assistant. Currently fixing the data leakage problem discovered in earlier experimental work (63% speaker overlap), re-running experiments under corrected protocols, organizing experimental data, and drafting manuscripts.</div>
+          <div class="growth-stage-label">Remote Research Assistant — BHE Lab, BIT</div>
+          <div class="growth-stage-desc">After graduation, continued at BHE Lab remotely. Currently leading the distribution-driven child speech emotion recognition project — fixed the data leakage (63% speaker overlap), rebuilt the full pipeline, and drafted manuscripts for submission. Independently exploring AI agent technologies and embodied intelligence, expanding beyond speech into broader AI research directions.</div>
         </div>
       </div>
       <div class="growth-stage">
-        <div class="growth-stage-num">2026-Now</div>
+        <div class="growth-stage-num">2026.05-06</div>
         <div class="growth-stage-body">
-          <div class="growth-stage-label">From school to society: first job at CYDOO</div>
-          <div class="growth-stage-desc">Navigating the shift from process-oriented research to result-driven engineering. Continuing to develop research skills alongside industry preparation. Learning when to apply research thinking and when to ship. Looking forward.</div>
+          <div class="growth-stage-label">A brief industry chapter — CYDOO</div>
+          <div class="growth-stage-desc">Joined CYDOO's algorithm team, working on SMDSL, CAD parsing, agent platforms, and robot control. Collaborated with like-minded colleagues on cutting-edge AI problems at industry speed. Departed after one month — the experience clarified that my long-term direction lies at the intersection of research and engineering, not purely in either. Grateful for the accelerated learning and the clarity it brought.</div>
         </div>
       </div>
     </div>
@@ -822,7 +854,7 @@
 
   <!-- Footer -->
   <footer>
-    <span>Last updated: May 2026</span>
+    <span>Last updated: June 2026</span>
     <span>Design references: <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank">awesome-design-md</a> &amp; <a href="https://jonbarron.info" target="_blank">Jon Barron</a></span>
   </footer>
 
