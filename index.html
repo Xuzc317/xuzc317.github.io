@@ -622,13 +622,12 @@
         <div class="work-desc">
           <p class="work-desc-p">Reproduced an existing baseline and found <span class="highlight">speaker overlap</span> between its train and test splits. Switched to strict <span class="highlight">speaker-independent partitioning</span> (MD5 hash, zero-leakage assertion) and re-evaluated; the earlier scores did not hold under the corrected split. Root cause identified: mean-pooled handcrafted features (162-dim) collapse the temporal axis, so the Conv1d stack slides along the feature dimension rather than time.</p>
           <p class="work-desc-p">Working on a three-stage framework (Data Pipeline → WavLM Backbone → Temporal Pooling). Implemented <span class="highlight">WavLM Base+ frame-level SSL features</span> (768-dim × T) with learnable 12-layer fusion weights. The proposed <span class="highlight">prosody-guided temporal importance pooling</span> — weighting frames by children's F0 and energy contours instead of blind mean pooling — is at the design and validation stage; the manuscript is being restructured.</p>
-          <p class="work-desc-p"><span class="highlight">92.78% test WA</span> on C-BESD under strict 6:2:2 speaker-independent protocol (Self-Attention pooling). Prosody Pooling achieves 91.30% WA with stronger interpretability (APC=0.718). Cross-corpus experiments reveal distribution shift boundaries: IEMOCAP (FD=7.20, 58.67% WA), FAU Aibo (FD=8.50, 66.36% WA in-domain, 19.56% zero-shot). Multi-seed robustness verified (65.15%±1.12 on FAU). Manuscript submitted.</p>
+          <p class="work-desc-p">Experiments are still in progress and results are not yet final, so no benchmark numbers are reported here — the evaluation protocol is being reworked before any figures are published. What is settled is the methodology: strict speaker-independent partitioning with an explicit zero-leakage assertion, applied consistently across all corpora.</p>
         </div>
         <div class="work-result-row">
-          <span class="work-stat">92.78% WA (C-BESD)</span>
-          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">6:2:2 speaker-independent</span>
-          <span class="work-stat">FD ∝ 1/Accuracy</span>
-          <span class="work-stat">Prosody Pooling APC=0.718</span>
+          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Speaker-independent partitioning</span>
+          <span class="work-stat">Zero-leakage assertion</span>
+          <span class="work-stat">Results pending</span>
         </div>
       </div>
 
@@ -652,11 +651,11 @@
       <!-- RAG + Agent System -->
       <div class="work-card">
         <div class="work-card-header">
-          <span class="work-tag work-tag-project">System Building</span>
+          <span class="work-tag work-tag-project">Learning Project</span>
         </div>
-        <div class="work-title">Enterprise Knowledge Base RAG + Agent System</div>
+        <div class="work-title">RAG + Agent Practice: Retrieval-Augmented Q&amp;A Demo</div>
         <div class="work-desc">
-          <p class="work-desc-p">Built an end-to-end retrieval-augmented generation system for enterprise document Q&A. Pipeline spans <span class="highlight">document chunking, embedding, vector retrieval, prompt assembly, and LLM generation</span>. Extended with agent tool-calling capabilities — summarization, task extraction, and structured querying — demonstrating integration across embedding, retrieval, API orchestration, and LLM inference.</p>
+          <p class="work-desc-p">A learning-oriented implementation of a retrieval-augmented generation pipeline for document Q&amp;A, built to understand the full path end to end. It covers <span class="highlight">document chunking, embedding, vector retrieval, prompt assembly, and LLM generation</span>, with agent tool-calling for summarization, task extraction, and structured querying. The component modules — including the vector store and agent layer — are adapted from public reference implementations, and the code is AI-assisted; my focus was reading it through, getting it running, and tracing how the pieces connect.</p>
         </div>
       </div>
 
@@ -664,17 +663,17 @@
       <div class="work-card">
         <div class="work-card-header">
           <span class="work-tag">Publication</span>
-          <span class="work-venue"><span class="venue-badge">IMCEC 2024</span> April 16, 2024</span>
+          <span class="work-venue"><span class="venue-badge">IMCEC 2024</span> April 16, 2024 &nbsp;·&nbsp; Fifth author</span>
         </div>
         <div class="work-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
-        <div class="work-meta">..., <strong>Zichao Xu</strong>, ShanHuang</div>
+        <div class="work-meta">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation — IEEE IMCEC 2024. I am the <strong>fifth author</strong>.</div>
       </div>
 
       <!-- Software Copyright -->
       <div class="work-card">
         <div class="work-card-header">
           <span class="work-tag">Software</span>
-          <span class="work-venue">Reg. No. 2024SR1790888 &nbsp;·&nbsp; 2024.11.14</span>
+          <span class="work-venue">Software Copyright</span>
         </div>
         <div class="work-title">IoT-Based Smart Stereoscopic Agriculture System [HuiNong] V1.0</div>
         <div class="work-meta">Beijing Institute of Technology, Zhuhai; ...; <strong>Zichao Xu</strong></div>
