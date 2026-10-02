@@ -302,6 +302,27 @@
 
     /* ─── Work / Publications ───────────────────────────── */
     .work-list { display: flex; flex-direction: column; }
+    .work-group + .work-group { margin-top: 34px; }
+    .work-group-title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 0 18px 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .work-group-title .cn {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
 
     .work-card {
       padding: 22px 18px;
@@ -615,79 +636,105 @@
     </div>
 
     <div class="work-list">
+      <section class="work-group" aria-labelledby="work-embodied">
+        <h3 class="work-group-title" id="work-embodied">Embodied Intelligence <span class="cn">具身智能</span></h3>
 
-      <!-- Research Project: System Reconstruction Case Study -->
-      <div class="work-card">
-        <div class="work-card-header">
-          <span class="work-tag work-tag-project">Research Project</span>
-          <span class="work-venue"><span class="venue-badge">2026.01 — Present</span></span>
+        <div class="work-card">
+          <div class="work-card-header">
+            <span class="work-tag work-tag-project">Hands-on Project</span>
+            <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
+          </div>
+          <div class="work-title">SO-ARM101 Teleoperation and Imitation Learning</div>
+          <div class="work-desc">
+            <p class="work-desc-p">At JoyandAI, I assembled a <span class="highlight">SO-ARM101 leader–follower pair</span>, assigned and checked servo IDs, calibrated both arms, and brought up teleoperation. This gave me hands-on experience with the complete path from mechanical assembly and wiring to coordinated arm motion.</p>
+            <p class="work-desc-p">I collected teleoperated demonstrations using <span class="highlight">two cameras</span>, trained an ACT imitation-learning policy on the recorded data, and ran model inference. The workflow connected robot setup, visual data collection, policy training, and inference.</p>
+            <p class="work-desc-p">I traced several hardware and calibration failures: duplicate servo IDs on parts reused from another project, reversed ID assignments on the leader arm, a cable short when the arm folded, and a midpoint offset that drove a servo beyond its physical range. JoyandAI's <a href="https://www.makerobots.cn/tutorial/soarm101/v0.4.3/prerequisites/git-basics-linux" target="_blank" rel="noopener noreferrer">SO-ARM101 tutorial (v0.4.3)</a> is a reference for the setup workflow.</p>
+          </div>
+          <div class="work-result-row">
+            <span class="work-stat">Assembly &amp; calibration</span>
+            <span class="work-stat">Dual-camera data collection</span>
+            <span class="work-stat">ACT training &amp; inference</span>
+          </div>
         </div>
-        <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
-        <div class="work-desc">
-          <p class="work-desc-p">Reproduced an existing baseline and found <span class="highlight">speaker overlap</span> between its train and test splits. Switched to strict <span class="highlight">speaker-independent partitioning</span> (MD5 hash, zero-leakage assertion) and re-evaluated; the earlier scores did not hold under the corrected split. Root cause identified: mean-pooled handcrafted features (162-dim) collapse the temporal axis, so the Conv1d stack slides along the feature dimension rather than time.</p>
-          <p class="work-desc-p">Rebuilt the evaluation pipeline around frame-level <span class="highlight">WavLM Base representations</span>, 12-layer fusion, and temporal pooling, then completed a <span class="highlight">210-run experimental suite</span> across C-BESD, FAU Aibo, and IEMOCAP. The study tests pooling, augmentation, layer fusion, backbone fine-tuning, ablations, and cross-corpus transfer under speaker-independent splits.</p>
-          <p class="work-desc-p">On C-BESD, the three-seed weighted accuracy reached <span class="highlight">91.87% with a frozen backbone</span> and <span class="highlight">96.91% after fine-tuning</span>. Zero-shot transfer dropped sharply across corpora; target-domain fine-tuning recovered performance, with gains that depended on the target dataset. The results point to data distribution and evaluation protocol as central to reliable child speech emotion recognition.</p>
-        </div>
-        <div class="work-result-row">
-          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Speaker-independent partitioning</span>
-          <span class="work-stat">Zero-leakage assertion</span>
-          <span class="work-stat">210 validated runs</span>
-        </div>
-      </div>
 
-      <!-- SMDSL: Spatial-Motion DSL -->
-      <div class="work-card">
-        <div class="work-card-header">
-          <span class="work-tag work-tag-project">Research Project</span>
-          <span class="work-venue"><span class="venue-badge">2026.05 — 2026.06</span></span>
+        <div class="work-card">
+          <div class="work-card-header">
+            <span class="work-tag work-tag-project">Next Research Focus</span>
+            <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
+          </div>
+          <div class="work-title">OpenMicroDuck / microduck_rl</div>
+          <div class="work-desc">
+            <p class="work-desc-p">JoyandAI's <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> recreates the open-source MicroDuck biped with domestically sourced parts to make the platform more affordable. Because the actuator hardware differs from the original, its control policies need to be tested and adapted for the new physical setup. The team's <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl fork</a> provides the reinforcement-learning environment.</p>
+            <p class="work-desc-p">I am learning the assembly and hardware workflow and testing trained policies in <span class="highlight">MuJoCo simulation</span>. OpenMicroDuck will be my <span class="highlight">main next research focus</span>: I plan to study the gap between simulation and the domestic hardware, then investigate PPO policy optimization. These are ongoing and planned steps, not completed research results.</p>
+          </div>
+          <div class="work-result-row">
+            <span class="work-stat">Current: MuJoCo policy testing</span>
+            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Next: PPO research</span>
+          </div>
         </div>
-        <div class="work-title">SMDSL: A Domain-Specific Language for Embodied Intelligence Spatial-Motion Modeling</div>
-        <div class="work-desc">
-          <p class="work-desc-p">The idea grew out of conversations with CYDOO's CEO about vision-language-action (VLA) systems, plug-and-play industrial robotics, shared pipelines, and DSLs. I explored how a structured intermediate representation might connect high-level task intent with lower-level robot control, drawing on Fei-Fei Li's world-model research, embodied AI, A* search, image segmentation, and industrial CAD parsing.</p>
-          <p class="work-desc-p">The published <a href="https://github.com/Xuzc317/SMDSL_2D" target="_blank" rel="noopener noreferrer">SMDSL_2D prototype</a> implements a <span class="highlight">Python-based, static 2D navigation contract</span> with occupancy-grid geometry, distance fields, A*-derived topology, and offline validation. My longer-term research goal is to explore a <span class="highlight">Rust-based, hardware-agnostic DSL and pipeline</span> for efficient translation from task descriptions to robot commands, beyond CUDA-centered tooling. That broader system remains a research direction.</p>
-        </div>
-        <div class="work-result-row">
-          <span class="work-stat">Static 2D prototype</span>
-          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Rust DSL research direction</span>
-        </div>
-      </div>
+      </section>
 
-      <!-- SO-ARM101 Teleoperation -->
-      <div class="work-card">
-        <div class="work-card-header">
-          <span class="work-tag work-tag-project">Robotics Practice</span>
-          <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
-        </div>
-        <div class="work-title">SO-ARM101 Teleoperation and Imitation Learning</div>
-        <div class="work-desc">
-          <p class="work-desc-p">Assembled a SO-ARM101 leader–follower pair, assigned servo IDs, calibrated both arms, and ran teleoperation. Collected demonstrations with two cameras, trained an <span class="highlight">ACT imitation-learning policy</span>, and ran model inference.</p>
-          <p class="work-desc-p">Troubleshot duplicate servo IDs from reused components, reversed ID assignments on the leader arm, a cable short when the arm folded, and midpoint calibration that pushed a servo beyond its physical range. The work connected mechanical setup, wiring, calibration, data collection, and policy testing into one practical workflow.</p>
-        </div>
-      </div>
+      <section class="work-group" aria-labelledby="work-speech">
+        <h3 class="work-group-title" id="work-speech">Speech &amp; Intelligent Audio <span class="cn">语音学 / 智能音频</span></h3>
 
-      <!-- OpenMicroDuck -->
-      <div class="work-card">
-        <div class="work-card-header">
-          <span class="work-tag work-tag-project">Robotics Practice</span>
-          <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
+        <div class="work-card">
+          <div class="work-card-header">
+            <span class="work-tag work-tag-project">Research in Progress</span>
+            <span class="work-venue"><span class="venue-badge">2026.01 — Present</span></span>
+          </div>
+          <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
+          <div class="work-desc">
+            <p class="work-desc-p">Reproduced an existing baseline and found <span class="highlight">speaker overlap</span> between its train and test splits. Switched to strict <span class="highlight">speaker-independent partitioning</span> (MD5 hash, zero-leakage assertion) and re-evaluated; the earlier scores did not hold under the corrected split. Root cause identified: mean-pooled handcrafted features (162-dim) collapse the temporal axis, so the Conv1d stack slides along the feature dimension rather than time.</p>
+            <p class="work-desc-p">Rebuilt the evaluation pipeline around frame-level <span class="highlight">WavLM Base representations</span>, 12-layer fusion, and temporal pooling, then completed a <span class="highlight">210-run experimental suite</span> across C-BESD, FAU Aibo, and IEMOCAP. The study tests pooling, augmentation, layer fusion, backbone fine-tuning, ablations, and cross-corpus transfer under speaker-independent splits.</p>
+            <p class="work-desc-p">On C-BESD, the three-seed weighted accuracy reached <span class="highlight">91.87% with a frozen backbone</span> and <span class="highlight">96.91% after fine-tuning</span>. Zero-shot transfer dropped sharply across corpora; target-domain fine-tuning recovered performance, with gains that depended on the target dataset. The experimental suite is complete; analysis and manuscript work remain in progress.</p>
+          </div>
+          <div class="work-result-row">
+            <span class="work-stat">Speaker-independent evaluation</span>
+            <span class="work-stat">210 validated runs</span>
+            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Research in progress</span>
+          </div>
         </div>
-        <div class="work-title">OpenMicroDuck / microduck_rl</div>
-        <div class="work-desc">
-          <p class="work-desc-p"><a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> is JoyandAI's open-source reproduction of MicroDuck using domestic components to lower the cost of a small bipedal robot. I have been learning the team's assembly process and am currently testing trained policies in <span class="highlight">MuJoCo simulation</span>. PPO policy optimization is a planned next step.</p>
-        </div>
-      </div>
 
-      <!-- Paper -->
-      <div class="work-card">
-        <div class="work-card-header">
-          <span class="work-tag">Publication</span>
-          <span class="work-venue"><span class="venue-badge">IMCEC 2024</span> April 16, 2024 &nbsp;·&nbsp; Fifth author</span>
+        <div class="work-card">
+          <div class="work-card-header">
+            <span class="work-tag">Publication</span>
+            <span class="work-venue"><span class="venue-badge">IMCEC 2024</span> April 16, 2024 &nbsp;·&nbsp; Fifth author</span>
+          </div>
+          <div class="work-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
+          <div class="work-meta">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation — IEEE IMCEC 2024. I am the <strong>fifth author</strong>.</div>
         </div>
-        <div class="work-title">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation</div>
-        <div class="work-meta">A Multi-Means Speech Encryption Algorithm Based on Improved Zigzag Transformation — IEEE IMCEC 2024. I am the <strong>fifth author</strong>.</div>
-      </div>
+      </section>
 
-      <!-- Software Copyright -->
+      <section class="work-group" aria-labelledby="work-exploratory">
+        <h3 class="work-group-title" id="work-exploratory">Exploratory Research <span class="cn">感兴趣 / 尝试研究</span></h3>
+
+        <div class="work-card">
+          <div class="work-card-header">
+            <span class="work-tag work-tag-project">Exploratory Research</span>
+            <span class="work-venue"><span class="venue-badge">2026.05 — 2026.06</span></span>
+          </div>
+          <div class="work-title">SMDSL: A Domain-Specific Language for Embodied Intelligence Spatial-Motion Modeling</div>
+          <div class="work-desc">
+            <p class="work-desc-p">The idea grew out of conversations with CYDOO's CEO about vision-language-action (VLA) systems, plug-and-play industrial robotics, shared pipelines, and DSLs. I explored how a structured intermediate representation might connect high-level task intent with lower-level robot control, drawing on Fei-Fei Li's world-model research, embodied AI, A* search, image segmentation, and industrial CAD parsing.</p>
+            <p class="work-desc-p">The published <a href="https://github.com/Xuzc317/SMDSL_2D" target="_blank" rel="noopener noreferrer">SMDSL_2D prototype</a> implements a <span class="highlight">Python-based, static 2D navigation contract</span> with occupancy-grid geometry, distance fields, A*-derived topology, and offline validation. My longer-term research goal is to explore a <span class="highlight">Rust-based, hardware-agnostic DSL and pipeline</span> for efficient translation from task descriptions to robot commands, beyond CUDA-centered tooling. That broader system remains an exploratory research direction.</p>
+          </div>
+          <div class="work-result-row">
+            <span class="work-stat">Static 2D prototype</span>
+            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Exploratory research</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Additional Work -->
+  <section id="additional-work" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Additional Work</h2>
+      <span class="cn">其他作品</span>
+    </div>
+    <div class="work-list">
       <div class="work-card">
         <div class="work-card-header">
           <span class="work-tag">Software</span>
@@ -696,7 +743,6 @@
         <div class="work-title">IoT-Based Smart Stereoscopic Agriculture System [HuiNong] V1.0</div>
         <div class="work-meta">Beijing Institute of Technology, Zhuhai; ...; <strong>Zichao Xu</strong></div>
       </div>
-
     </div>
   </section>
 
