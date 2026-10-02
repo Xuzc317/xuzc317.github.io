@@ -556,13 +556,13 @@
     <div class="hero-left">
       <div class="hero-name">Zico Xu</div>
       <div class="hero-name-cn">许梓超</div>
-      <div class="hero-identity">Remote Research Assistant</div>
+      <div class="hero-identity">Field Application Engineer · Remote Research Assistant</div>
 
       <p class="hero-bio">
-        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. I am currently a Remote Research Assistant at the Brain Health Engineering (BHE) Lab, working on speech emotion recognition and distribution shift.
+        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. I am a Field Application Engineer at JoyandAI in Shenzhen and a Remote Research Assistant at the Brain Health Engineering (BHE) Lab, working on speech emotion recognition.
       </p>
       <p class="hero-bio">
-        I have a strong interest in <strong>AI agent technologies</strong> and <strong>embodied intelligence</strong>, converging toward the intersection of algorithms and systems — understanding not just what works, but why, and under what conditions.
+        I am interested in <strong>practical AI applications</strong>, <strong>frontier embodied intelligence</strong>, and <strong>AI safety</strong> — from useful systems people can build with today to reliable robots and AI systems we can trust.
       </p>
     </div>
     <div class="hero-right avatar-wrap hero-order-swap">
@@ -591,6 +591,10 @@
       <span class="cn">动态</span>
     </div>
     <div class="news-list">
+      <div class="news-item">
+        <span class="news-date">2026.09</span>
+        <span class="news-text">Joined <strong>JoyandAI</strong> in Shenzhen as a Field Application Engineer, supporting its open-source robotics community.</span>
+      </div>
       <div class="news-item">
         <span class="news-date">2026.06</span>
         <span class="news-text">Left <strong>CYDOO</strong> by mutual agreement following a company reorganisation.</span>
@@ -621,13 +625,13 @@
         <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
         <div class="work-desc">
           <p class="work-desc-p">Reproduced an existing baseline and found <span class="highlight">speaker overlap</span> between its train and test splits. Switched to strict <span class="highlight">speaker-independent partitioning</span> (MD5 hash, zero-leakage assertion) and re-evaluated; the earlier scores did not hold under the corrected split. Root cause identified: mean-pooled handcrafted features (162-dim) collapse the temporal axis, so the Conv1d stack slides along the feature dimension rather than time.</p>
-          <p class="work-desc-p">Working on a three-stage framework (Data Pipeline → WavLM Backbone → Temporal Pooling). Implemented <span class="highlight">WavLM Base+ frame-level SSL features</span> (768-dim × T) with learnable 12-layer fusion weights. The proposed <span class="highlight">prosody-guided temporal importance pooling</span> — weighting frames by children's F0 and energy contours instead of blind mean pooling — is at the design and validation stage; the manuscript is being restructured.</p>
-          <p class="work-desc-p">Experiments are still in progress and results are not yet final, so no benchmark numbers are reported here — the evaluation protocol is being reworked before any figures are published. What is settled is the methodology: strict speaker-independent partitioning with an explicit zero-leakage assertion, applied consistently across all corpora.</p>
+          <p class="work-desc-p">Rebuilt the evaluation pipeline around frame-level <span class="highlight">WavLM Base representations</span>, 12-layer fusion, and temporal pooling, then completed a <span class="highlight">210-run experimental suite</span> across C-BESD, FAU Aibo, and IEMOCAP. The study tests pooling, augmentation, layer fusion, backbone fine-tuning, ablations, and cross-corpus transfer under speaker-independent splits.</p>
+          <p class="work-desc-p">On C-BESD, the three-seed weighted accuracy reached <span class="highlight">91.87% with a frozen backbone</span> and <span class="highlight">96.91% after fine-tuning</span>. Zero-shot transfer dropped sharply across corpora; target-domain fine-tuning recovered performance, with gains that depended on the target dataset. The results point to data distribution and evaluation protocol as central to reliable child speech emotion recognition.</p>
         </div>
         <div class="work-result-row">
           <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Speaker-independent partitioning</span>
           <span class="work-stat">Zero-leakage assertion</span>
-          <span class="work-stat">Results pending</span>
+          <span class="work-stat">210 validated runs</span>
         </div>
       </div>
 
@@ -639,23 +643,37 @@
         </div>
         <div class="work-title">SMDSL: A Domain-Specific Language for Embodied Intelligence Spatial-Motion Modeling</div>
         <div class="work-desc">
-          <p class="work-desc-p">Contributed requirements analysis and validation for a <span class="highlight">domain-specific language (DSL)</span> describing spatial configurations and motion primitives in embodied AI scenarios. The DSL provides a structured, composable syntax to specify 3D spatial relationships, robotic motion trajectories, and action sequences — bridging the gap between high-level task descriptions and low-level robot control commands.</p>
-          <p class="work-desc-p">Worked with a <span class="highlight">parsing and execution prototype</span> that translates DSL scripts into robot instructions, defining the structured input schema and the trajectory validation rules. The DSL targets complex embodied tasks where spatial reasoning and motion planning are tightly coupled.</p>
+          <p class="work-desc-p">The idea grew out of conversations with CYDOO's CEO about vision-language-action (VLA) systems, plug-and-play industrial robotics, shared pipelines, and DSLs. I explored how a structured intermediate representation might connect high-level task intent with lower-level robot control, drawing on Fei-Fei Li's world-model research, embodied AI, A* search, image segmentation, and industrial CAD parsing.</p>
+          <p class="work-desc-p">The published <a href="https://github.com/Xuzc317/SMDSL_2D" target="_blank" rel="noopener noreferrer">SMDSL_2D prototype</a> implements a <span class="highlight">Python-based, static 2D navigation contract</span> with occupancy-grid geometry, distance fields, A*-derived topology, and offline validation. My longer-term research goal is to explore a <span class="highlight">Rust-based, hardware-agnostic DSL and pipeline</span> for efficient translation from task descriptions to robot commands, beyond CUDA-centered tooling. That broader system remains a research direction.</p>
         </div>
         <div class="work-result-row">
-          <span class="work-stat">Requirements &amp; Validation</span>
-          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Demo Implementation</span>
+          <span class="work-stat">Static 2D prototype</span>
+          <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Rust DSL research direction</span>
         </div>
       </div>
 
-      <!-- RAG + Agent System -->
+      <!-- SO-ARM101 Teleoperation -->
       <div class="work-card">
         <div class="work-card-header">
-          <span class="work-tag work-tag-project">Learning Project</span>
+          <span class="work-tag work-tag-project">Robotics Practice</span>
+          <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
         </div>
-        <div class="work-title">RAG + Agent Practice: Retrieval-Augmented Q&amp;A Demo</div>
+        <div class="work-title">SO-ARM101 Teleoperation and Imitation Learning</div>
         <div class="work-desc">
-          <p class="work-desc-p">A learning-oriented implementation of a retrieval-augmented generation pipeline for document Q&amp;A, built to understand the full path end to end. It covers <span class="highlight">document chunking, embedding, vector retrieval, prompt assembly, and LLM generation</span>, with agent tool-calling for summarization, task extraction, and structured querying. The component modules — including the vector store and agent layer — are adapted from public reference implementations, and the code is AI-assisted; my focus was reading it through, getting it running, and tracing how the pieces connect.</p>
+          <p class="work-desc-p">Assembled a SO-ARM101 leader–follower pair, assigned servo IDs, calibrated both arms, and ran teleoperation. Collected demonstrations with two cameras, trained an <span class="highlight">ACT imitation-learning policy</span>, and ran model inference.</p>
+          <p class="work-desc-p">Troubleshot duplicate servo IDs from reused components, reversed ID assignments on the leader arm, a cable short when the arm folded, and midpoint calibration that pushed a servo beyond its physical range. The work connected mechanical setup, wiring, calibration, data collection, and policy testing into one practical workflow.</p>
+        </div>
+      </div>
+
+      <!-- OpenMicroDuck -->
+      <div class="work-card">
+        <div class="work-card-header">
+          <span class="work-tag work-tag-project">Robotics Practice</span>
+          <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
+        </div>
+        <div class="work-title">OpenMicroDuck / microduck_rl</div>
+        <div class="work-desc">
+          <p class="work-desc-p"><a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> is JoyandAI's open-source reproduction of MicroDuck using domestic components to lower the cost of a small bipedal robot. I have been learning the team's assembly process and am currently testing trained policies in <span class="highlight">MuJoCo simulation</span>. PPO policy optimization is a planned next step.</p>
         </div>
       </div>
 
@@ -690,27 +708,14 @@
       <span class="cn">研究方向</span>
     </div>
 
-    <div class="ri-grid">
-      <div class="ri-col">
-        <div class="ri-label">Current Exploration</div>
-        <ul class="ri-list">
-          <li><strong>AI Agent Technologies</strong> — tool-use architectures, multi-agent orchestration, agent-platform integration</li>
-          <li><strong>Embodied Intelligence</strong> — spatial-motion DSL, robot control, simulation-to-real transfer</li>
-          <li><strong>AI Systems</strong> — efficient inference, model deployment, algorithm-system co-design</li>
-        </ul>
-      </div>
-      <div class="ri-col">
-        <div class="ri-label">Previous Focus</div>
-        <ul class="ri-list">
-          <li><strong>Computer Audition</strong> — speech and audio representation, deep learning for acoustic tasks</li>
-          <li><strong>Speech Security</strong> — encryption algorithms, information hiding</li>
-          <li><strong>Affective Computing</strong> — speech emotion recognition, distribution shift, speaker generalization</li>
-        </ul>
-      </div>
-    </div>
+    <ul class="ri-list">
+      <li><strong>Embodied Intelligence</strong> — LeRobot, humanoid robots, reinforcement learning, and imitation learning</li>
+      <li><strong>AI Applications</strong> — turning capable models into useful, accessible tools and workflows</li>
+      <li><strong>AI Safety</strong> — reliability, robustness, and responsible deployment of AI systems</li>
+    </ul>
 
     <p class="ri-dir">
-      Currently converging from single-domain speech research toward generalizable methods in agent systems and embodied intelligence. The core question: how do we build AI systems that are both capable and reliably understood?
+      I am especially interested in making AI practical while understanding how embodied systems can learn, act, and operate reliably in the real world.
     </p>
   </section>
 
@@ -737,7 +742,7 @@
       </div>
       <div class="skills-cat">
         <div class="skills-cat-label">Reinforcement Learning &amp; Embodied AI</div>
-        <div class="skills-cat-list">PPO and policy optimization methods. Isaac Gym and Mujoco simulation for robot control policy training. RL fundamentals and practical implementation.</div>
+        <div class="skills-cat-list">SO-ARM101 assembly, calibration, teleoperation, dual-camera data collection, ACT policy training and inference. Currently exploring MuJoCo policy testing and PPO optimization for small bipedal robots.</div>
       </div>
     </div>
   </section>
@@ -750,6 +755,15 @@
       <span class="cn">经历</span>
     </div>
     <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-period">2026.09 — Present</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>Field Application Engineer (FAE)</div>
+          <div class="tl-place">JoyandAI, Shenzhen</div>
+          <div class="tl-desc">Joined an embodied-AI startup with a maker and geek culture, providing technical support for open-source robotics. The team's work spans OpenMicroDuck, SO-ARM101, LeKiWi, and XLeRobot in the LeRobot ecosystem. Hands-on work includes SO-ARM101 assembly, calibration, teleoperation, data collection, policy training, and troubleshooting. See the team's <a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">open-source tutorials</a>.</div>
+        </div>
+      </div>
 
       <div class="tl-item">
         <div class="tl-period">2026.05 — 2026.06</div>
@@ -848,12 +862,19 @@
           <div class="growth-stage-desc">Joined CYDOO's physical-AI team on a short-term basis, working on a static 2D navigation prototype and internal AI agent tooling. Departed by mutual agreement following a company reorganisation.</div>
         </div>
       </div>
+      <div class="growth-stage">
+        <div class="growth-stage-num">2026.09-Now</div>
+        <div class="growth-stage-body">
+          <div class="growth-stage-label">From research to hands-on robotics — JoyandAI</div>
+          <div class="growth-stage-desc">Joined JoyandAI in Shenzhen as a Field Application Engineer. Working with open-source robot platforms has brought the full path from hardware setup and teleoperation to demonstration data, policy training, simulation, and user support into focus.</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <span>Last updated: June 2026</span>
+    <span>Last updated: October 2026</span>
     <span>Design references: <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank">awesome-design-md</a> &amp; <a href="https://jonbarron.info" target="_blank">Jon Barron</a></span>
   </footer>
 
