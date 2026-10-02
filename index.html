@@ -78,6 +78,7 @@
       letter-spacing: .01em;
       color: var(--text);
     }
+    .topbar-actions { display: flex; align-items: center; gap: 22px; }
     .topbar-nav { display: flex; gap: 22px; font-size: .85rem; }
     .topbar-nav a {
       color: var(--muted);
@@ -86,6 +87,23 @@
       transition: color .15s;
     }
     .topbar-nav a:hover { color: var(--accent); text-decoration: none; }
+    .lang-toggle {
+      border: 1px solid var(--border-strong);
+      border-radius: 99px;
+      background: var(--surface);
+      color: var(--accent);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: .82rem;
+      font-weight: 600;
+      line-height: 1.4;
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+    .lang-toggle:hover { border-color: var(--accent); background: var(--accent-lt); }
+    .lang-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    html[lang="zh-CN"] .section-head .cn,
+    html[lang="zh-CN"] .work-group-title .cn { display: none; }
 
     /* ─── Hero ──────────────────────────────────────────── */
     .hero {
@@ -538,6 +556,7 @@
       .hero-name { font-size: 1.75rem; }
       .hero-bio { font-size: .9rem; }
       .topbar-nav { display: none; }
+      .topbar-actions { gap: 0; }
       .ri-grid { grid-template-columns: 1fr; gap: 20px; }
       .skills-grid { grid-template-columns: 1fr; gap: 18px; }
       .growth-stage { grid-template-columns: 72px 1fr; gap: 12px; }
@@ -564,12 +583,15 @@
   <!-- Top bar -->
   <div class="topbar">
     <span class="topbar-name">Zico Xu · 许梓超</span>
-    <nav class="topbar-nav">
-      <a href="#research">Research</a>
-      <a href="#work">Work</a>
-      <a href="#growth">Growth</a>
-      <a href="#skills">Skills</a>
-    </nav>
+    <div class="topbar-actions">
+      <nav class="topbar-nav" aria-label="Main navigation">
+        <a href="#research">Research</a>
+        <a href="#work">Work</a>
+        <a href="#growth">Growth</a>
+        <a href="#skills">Skills</a>
+      </nav>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="切换为中文" aria-pressed="false">中文</button>
+    </div>
   </div>
 
   <!-- Hero -->
@@ -941,31 +963,186 @@
     observer.observe(el);
   });
 
-  // Email copy-to-clipboard
+  // Static, site-authored translations. The original English markup remains the fallback.
+  const translations = [
+    ['.topbar-nav a', ['研究方向', '精选作品', '成长经历', '技术技能']],
+    ['.hero-identity', ['现场应用工程师（FAE） · 远程研究助理']],
+    ['.hero-bio', [
+      '我毕业于<strong>北京理工大学珠海学院（BITZH）</strong>，获计算机科学与技术工学学士学位。目前在深圳 JoyandAI 担任 FAE，同时在脑健康工程实验室（BHE Lab）担任远程研究助理，研究语音情感识别。',
+      '我关注<strong>AI 应用</strong>、<strong>前沿具身智能</strong>和<strong>AI 安全</strong>：既希望让现有 AI 真正解决问题，也关心机器人与 AI 系统如何可靠地工作。'
+    ]],
+    ['.section-head h2', ['动态', '精选作品', '成果发布', '研究兴趣', '技术技能', '经历', '成长与思考']],
+    ['.news-text', [
+      '2026 年 9 月加入深圳 <strong>JoyandAI</strong>，担任 FAE，为开源机器人社区提供技术支持。',
+      '公司重组后，经双方协商一致离开 <strong>CYDOO</strong>。',
+      '很高兴加入 <strong>CYDOO</strong>，担任算法助理工程师！'
+    ]],
+    ['#work .work-group-title', ['具身智能', '语音学与智能音频', '感兴趣与尝试研究']],
+    ['#work .work-card .work-tag', ['实践项目', '下一阶段主要研究', '研究中', '尝试研究']],
+    ['#work .work-card .work-venue .venue-badge', ['2026.09 — 至今', '2026.09 — 至今', '2026.01 — 至今', '2026.05 — 2026.06']],
+    ['#work .work-title', [
+      'SO-ARM101 遥操作与模仿学习',
+      'OpenMicroDuck / microduck_rl',
+      '分布变化下的系统重构：以儿童语音情感识别为例',
+      'SMDSL：具身智能空间运动建模的领域特定语言'
+    ]],
+    ['#work .work-desc-p', [
+      '在 JoyandAI，我组装了一对<strong>SO-ARM101 主臂与从臂</strong>，为舵机编号并核对 ID，分别标定两只机械臂，完成遥操作联调。这让我亲手走通了从机械装配、接线到双臂协同运动的流程。',
+      '我使用<strong>双相机</strong>采集遥操作示教数据，以采集的数据训练 ACT 模仿学习策略，并运行模型推理。整个流程贯通了机器人配置、视觉数据采集、策略训练和推理。',
+      '我排查了多项硬件与标定问题：从其他项目拆下的组件导致舵机 ID 重复、主臂 ID 分配顺序相反、机械臂折叠时线路短路，以及舵机中位偏移导致动作超出物理限位。配置流程可参考 JoyandAI 的<a href="https://www.makerobots.cn/tutorial/soarm101/v0.4.3/prerequisites/git-basics-linux" target="_blank" rel="noopener noreferrer">SO-ARM101 教程（v0.4.3）</a>。',
+      'JoyandAI 的 <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> 使用国产配件复刻开源双足机器人 MicroDuck，以降低平台成本。由于执行器硬件与原版不同，控制策略需要针对新的实体配置重新测试与适配；团队的 <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl 分支</a>提供强化学习环境。',
+      '我正在熟悉装配与硬件流程，并在<strong>MuJoCo 仿真</strong>中测试已训练策略。OpenMicroDuck 将是我<strong>接下来的主要研究方向</strong>：计划分析仿真与国产硬件之间的差异，再探索 PPO 策略优化。这些仍是正在进行或计划中的工作，尚非完成的研究成果。',
+      '我复现了原有基线，发现训练集与测试集存在<strong>说话人重叠</strong>。随后改用严格的<strong>说话人独立划分</strong>（MD5 哈希与零泄漏断言）重新评估，原先分数在修正后未能保持。进一步定位到一个结构问题：对 162 维手工特征做均值池化会抹去时间轴，使 Conv1d 沿特征维度而非时间维度滑动。',
+      '我围绕帧级<strong>WavLM Base 表征</strong>、12 层融合与时间池化重建了评估流程，并在 C-BESD、FAU Aibo 和 IEMOCAP 上完成<strong>210 次实验</strong>。研究覆盖池化、数据增强、层融合、主干微调、模块消融与跨语料迁移，均使用说话人独立划分。',
+      '在 C-BESD 上，三随机种子的加权准确率在<strong>冻结主干时达到 91.87%</strong>，<strong>微调后达到 96.91%</strong>。跨语料零样本迁移的表现明显下降；在目标域微调可以恢复性能，但增益取决于目标数据集。实验矩阵已经完成，分析与论文工作仍在进行中。',
+      '这个想法源于我在 CYDOO 与 CEO 讨论具身智能的未来方向：视觉-语言-动作（VLA）系统、即开即用的工业机器人、通用管道和领域特定语言。我参考李飞飞团队的世界模型研究、具身智能、A* 搜索、图像分割与工业 CAD 解析，探索如何用结构化中间表示衔接高层任务意图与底层机器人控制。',
+      '公开的 <a href="https://github.com/Xuzc317/SMDSL_2D" target="_blank" rel="noopener noreferrer">SMDSL_2D 原型</a>实现了基于 Python 的<strong>静态二维导航契约</strong>，包括占据栅格、距离场、A* 拓扑与离线验证。长期目标是探索基于 <strong>Rust 的硬件无关 DSL 与通用管道</strong>，高效地将任务描述转化为机器人指令，寻找 CUDA 中心化工具链之外的路径。更完整的系统仍属于尝试研究方向。'
+    ]],
+    ['#work .work-stat', [
+      '组装与标定', '双相机数据采集', 'ACT 训练与推理',
+      '当前：MuJoCo 策略测试', '下一步：PPO 研究',
+      '说话人独立评估', '210 次有效实验', '研究中',
+      '静态二维原型', '尝试研究'
+    ]],
+    ['#additional-work .work-tag', ['软件著作权', '论文发表']],
+    ['#additional-work .work-venue', [
+      '登记号 2024SR1790888 &nbsp;·&nbsp; 2024.11.14',
+      '<span class="venue-badge">IMCEC 2024</span> 2024 年 4 月 16 日 &nbsp;·&nbsp; 第五作者'
+    ]],
+    ['#additional-work .work-title', [
+      '基于物联网的智慧立体农业系统［慧农］V1.0',
+      '基于改进 Zigzag 变换的多方法语音加密算法'
+    ]],
+    ['#additional-work .work-meta', [
+      '北京理工大学珠海学院；……；<strong>许梓超</strong>',
+      '《基于改进 Zigzag 变换的多方法语音加密算法》，发表于 IEEE IMCEC 2024；我是<strong>第五作者</strong>。'
+    ]],
+    ['.ri-list li', [
+      '<strong>具身智能</strong>：LeRobot、人形机器人、强化学习与模仿学习',
+      '<strong>AI 应用</strong>：将模型能力转化为实用、易用的工具与工作流程',
+      '<strong>AI 安全</strong>：AI 系统的可靠性、鲁棒性与负责任部署'
+    ]],
+    ['.ri-dir', ['我尤其关注如何让 AI 真正落地，以及具身系统如何学习、行动并在真实世界中可靠运行。']],
+    ['.skills-cat-label', ['AI 智能体与大模型工具', '深度学习与基础设施', 'AI 应用开发', '强化学习与具身智能']],
+    ['.skills-cat-list', [
+      'Claude Code、Codex、Cursor、ChatGPT、Gemini、DeepSeek 已融入我的研究与开发流程。我采用人主导决策、AI 辅助执行的方式开发。',
+      'Python、PyTorch、CUDA/GPU 训练、Linux、Git；使用 Librosa 处理语音与时间序列数据，通过 ONNX 部署模型，并实践数据增强与小样本学习。',
+      'RAG、智能体与工具调用架构，提示词工程，Vibe Coding 与 Harness Engineering 方法，以及端到端 AI 系统集成。',
+      'SO-ARM101 组装、标定、遥操作、双相机数据采集、ACT 策略训练与推理。目前正在探索使用 MuJoCo 测试小型双足机器人策略和 PPO 优化。'
+    ]],
+    ['.tl-period', ['2026.09 — 至今', '2026.05 — 2026.06', '2025.06 — 至今', '2025.01 — 2025.06', '2021.09 — 2025.06']],
+    ['.tl-role', [
+      '<span class="tl-icon"></span>现场应用工程师（FAE）',
+      '<span class="tl-icon"></span>算法助理工程师',
+      '<span class="tl-icon"></span>远程研究助理',
+      '<span class="tl-icon"></span>研究实习生',
+      '<span class="tl-icon"></span>计算机科学与技术工学学士'
+    ]],
+    ['.tl-place', [
+      'JoyandAI，深圳',
+      'CYDOO（机器人），深圳',
+      '北京理工大学脑健康工程实验室（BHE Lab）',
+      '北京理工大学脑健康工程实验室（BHE Lab）',
+      '北京理工大学珠海学院（BITZH）'
+    ]],
+    ['.tl-desc', [
+      '加入一家具有极客与创客文化的具身智能创业公司，为开源机器人提供技术支持。团队项目涵盖 LeRobot 生态中的 OpenMicroDuck、SO-ARM101、LeKiWi 和 XLeRobot。我主要参与 SO-ARM101 的组装、标定、遥操作、数据采集、策略训练与故障排查。另见团队的<a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">开源教程</a>。',
+      '加入 CYDOO 的具身智能团队，参与静态二维导航原型的需求分析、结构化输入设计、离线测试、结果验证与现场演示；还负责内部 AI 智能体工具的配置和交付文档，并参与睿尔曼复合机器人的基础操作与调试。公司重组后，经双方协商一致离职。',
+      '毕业后以兼职远程研究助理身份继续在 BHE Lab 工作，参与广东省重点专项。在多个语料库上开展儿童语音情感识别研究，包括数据处理、质量检查、说话人独立划分、模型实验和结果复核；也探索 AI 智能体工具与具身智能。',
+      '进入实验室后系统学习文献综述、实验设计与学术写作，并承担数据清洗、预处理、基线复现和初步模型训练等任务。主要参与周副教授的儿童语音情感识别项目，研究真实声学条件下的语音表征学习与情感分类。',
+      '研究兴趣集中于计算机听觉、信号处理与深度学习，并加入周副教授所在的脑健康工程实验室。'
+    ]],
+    ['.growth-stage-num', ['2021 年前', '2021—2022', '2022—2023', '2023—2024', '2025.01—06', '2025.06—至今', '2026.05—06', '2026.09—至今']],
+    ['.growth-stage-label', [
+      '大学之前', '最初的专业：自动化', '转向计算机科学', '与科研的第一次相遇',
+      'BHE Lab 研究实习', 'BHE Lab 远程研究助理', 'CYDOO 的短期产业经历', '从研究走向动手机器人实践'
+    ]],
+    ['.growth-stage-desc', [
+      '那时的知识主要来自课本和老师，学习意味着掌握安排好的内容。我对技术很好奇，却还不知道如何独立提出并研究问题。',
+      '我以自动化专业进入北京理工大学珠海学院。起初的大学生活仍像高中的延续：上课、完成任务。随着时间推移，我开始意识到自己更想走另一条路。',
+      '我发现自己真正感兴趣的是编程、算法和 AI，于大一第一学期转入计算机科学与技术专业。课程项目让我开始面对没有标准答案的问题，自主学习逐渐成为习惯。',
+      '我选修了周副教授的语音识别课程，并担任课代表。课堂内外的持续交流让她邀请我加入 AI 与嵌入式实验室，这是我第一次进入科研环境。',
+      '大四时，院校调整使周副教授转入北京理工大学脑健康工程实验室，她邀请我参与研究实习。我在音频智能医学研究组参与省级重点项目，并为毕业论文确定方向，逐步从课程学习转向独立研究。',
+      '毕业后，我继续以兼职远程研究助理身份参与 BHE Lab 的儿童语音情感识别研究，处理多语料数据、检查质量与说话人划分、运行实验并复核结果，同时探索 AI 智能体工具和具身智能。',
+      '我短期加入 CYDOO 的具身智能团队，参与静态二维导航原型和内部 AI 智能体工具工作。公司重组后，双方协商一致结束合作。',
+      '我在深圳加入 JoyandAI，担任 FAE。开源机器人平台的工作让我更完整地接触从硬件配置、遥操作到示教数据、策略训练、仿真与用户支持的实践链路。'
+    ]],
+    ['footer > span', [
+      '最后更新：2026 年 10 月',
+      '设计参考：<a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener noreferrer">awesome-design-md</a> 与 <a href="https://jonbarron.info" target="_blank" rel="noopener noreferrer">Jon Barron</a>'
+    ]]
+  ];
+
+  const originalContent = new Map();
+  const translatedElements = translations.map(([selector, chinese]) => {
+    const elements = [...document.querySelectorAll(selector)];
+    if (elements.length !== chinese.length) {
+      console.error('Translation count mismatch:', selector, elements.length, chinese.length);
+    }
+    elements.forEach(element => originalContent.set(element, element.innerHTML));
+    return [elements, chinese];
+  });
+
+  const langToggle = document.getElementById('lang-toggle');
+  const mainNav = document.querySelector('.topbar-nav');
   const emailBadge = document.getElementById('email-badge');
   const emailLabel = document.getElementById('email-label');
+  const cvBadge = document.getElementById('cv-badge');
+  const cvLabel = document.getElementById('cv-label');
   const emailAddr = '210104102792@bitzh.edu.cn';
+  let currentLanguage = 'en';
 
+  function setLanguage(language, persist = true) {
+    currentLanguage = language === 'zh' ? 'zh' : 'en';
+    translatedElements.forEach(([elements, chinese]) => {
+      elements.forEach((element, index) => {
+        if (index < chinese.length) {
+          element.innerHTML = currentLanguage === 'zh' ? chinese[index] : originalContent.get(element);
+        }
+      });
+    });
+    document.documentElement.lang = currentLanguage === 'zh' ? 'zh-CN' : 'en';
+    document.title = currentLanguage === 'zh' ? 'Zico 的家' : "Zico's home";
+    mainNav.setAttribute('aria-label', currentLanguage === 'zh' ? '主导航' : 'Main navigation');
+    document.querySelector('.avatar').alt = currentLanguage === 'zh' ? '许梓超' : 'Zico Xu';
+    langToggle.textContent = currentLanguage === 'zh' ? 'English' : '中文';
+    langToggle.setAttribute('aria-label', currentLanguage === 'zh' ? 'Switch to English' : '切换为中文');
+    langToggle.setAttribute('aria-pressed', String(currentLanguage === 'zh'));
+    emailBadge.title = currentLanguage === 'zh' ? '点击复制邮箱' : 'Click to copy';
+    emailLabel.textContent = currentLanguage === 'zh' ? '邮箱' : 'Email';
+    cvLabel.textContent = currentLanguage === 'zh' ? '简历' : 'CV';
+    emailBadge.classList.remove('copied');
+    cvBadge.style.color = '';
+    cvBadge.style.borderColor = '';
+    if (persist) {
+      try { localStorage.setItem('zico-home-language', currentLanguage); } catch (_) {}
+    }
+  }
+
+  let savedLanguage = 'en';
+  try { savedLanguage = localStorage.getItem('zico-home-language') || 'en'; } catch (_) {}
+  setLanguage(savedLanguage, false);
+  langToggle.addEventListener('click', () => setLanguage(currentLanguage === 'en' ? 'zh' : 'en'));
+
+  // Email copy-to-clipboard
   emailBadge.addEventListener('click', () => {
     navigator.clipboard.writeText(emailAddr).then(() => {
-      emailLabel.textContent = 'Copied!';
+      emailLabel.textContent = currentLanguage === 'zh' ? '已复制！' : 'Copied!';
       emailBadge.classList.add('copied');
       setTimeout(() => {
-        emailLabel.textContent = 'Email';
+        emailLabel.textContent = currentLanguage === 'zh' ? '邮箱' : 'Email';
         emailBadge.classList.remove('copied');
       }, 1800);
     });
   });
 
   // CV not-available reminder
-  const cvBadge = document.getElementById('cv-badge');
-  const cvLabel = document.getElementById('cv-label');
   cvBadge.addEventListener('click', () => {
-    cvLabel.textContent = 'Not available yet';
+    cvLabel.textContent = currentLanguage === 'zh' ? '暂未提供' : 'Not available yet';
     cvBadge.style.color = 'var(--red)';
     cvBadge.style.borderColor = 'var(--red)';
     setTimeout(() => {
-      cvLabel.textContent = 'CV';
+      cvLabel.textContent = currentLanguage === 'zh' ? '简历' : 'CV';
       cvBadge.style.color = '';
       cvBadge.style.borderColor = '';
     }, 1800);
