@@ -13,23 +13,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #faf9f5;
+      --bg:        #fbfcfe;
       --surface:   #ffffff;
       --surface-2: #f5f0e8;
-      --border:    #e6dfd8;
+      --border:    #dfe6ed;
       --border-strong: #d5cec5;
-      --text:      #141413;
-      --text-body: #3d3d3a;
-      --muted:     #6c6a64;
+      --text:      #152b40;
+      --text-body: #425568;
+      --muted:     #758392;
       --muted-soft:#8e8b82;
-      --accent:    #3a6ea8;
+      --accent:    #355d83;
       --accent-warm:#cc785c;
-      --accent-lt: #edf2f9;
-      --accent-dk: #2a5088;
+      --accent-lt: #eef3f9;
+      --accent-dk: #193c5d;
       --red:       #c64545;
       --green:     #27a644;
-      --font-sans: 'Source Sans 3', system-ui, sans-serif;
-      --font-serif: 'Lora', Georgia, serif;
+      --font-sans: 'Helvetica Neue', 'PingFang SC', Arial, sans-serif;
+      --font-serif: 'Helvetica Neue', 'PingFang SC', Arial, sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, monospace;
       --radius-sm: 4px;
       --radius:    6px;
@@ -56,7 +56,7 @@
 
     /* ─── Layout ────────────────────────────────────────── */
     .page {
-      max-width: 880px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 0 24px 80px;
     }
@@ -108,40 +108,95 @@
     /* ─── Hero ──────────────────────────────────────────── */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 180px;
-      gap: 44px;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 48px;
       align-items: start;
-      margin-bottom: 40px;
+      margin-bottom: 46px;
     }
 
+    .hero-heading {
+      display: block;
+      margin-bottom: 4px;
+    }
     .hero-name {
       font-family: var(--font-serif);
-      font-size: 2.4rem;
+      font-size: 42px;
       font-weight: 600;
       line-height: 1.15;
-      letter-spacing: -.015em;
-      margin-bottom: 4px;
+      letter-spacing: -.045em;
+      margin: 0;
       color: var(--text);
+      white-space: normal;
     }
+    .hero-left, .hero-right, .tl-body { min-width: 0; }
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 25px;
+      padding-left: 24px;
+      border-left: 1px solid var(--border);
+    }
+    .hero-affiliations {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .institution-item { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .institution-marks { display: flex; align-items: center; justify-content: center; gap: 6px; width: 70px; flex: 0 0 70px; }
+    .institution-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .institution-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .institution-icon--wordmark {
+      width: 70px;
+      flex-basis: 70px;
+      border-radius: 0;
+    }
+    /* The supplied SVG has a square canvas; frame its central wordmark. */
+    .institution-icon--wordmark img {
+      height: auto;
+    }
+    .institution-copy { display: flex; flex-direction: column; min-width: 0; gap: 3px; }
+    .institution-name { font-size: 11px; font-weight: 500; line-height: 1.6; }
+    .institution-detail, .institution-period { color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .institution-period { white-space: nowrap; }
     .hero-name-cn {
       font-size: 1.05rem;
       color: var(--muted);
       font-weight: 300;
-      margin-bottom: 12px;
+      margin-top: 7px;
+      margin-bottom: 16px;
       font-family: var(--font-sans);
     }
     .hero-identity {
-      font-size: .9rem;
+      font-family: var(--font-mono);
+      font-size: 12px;
       font-weight: 500;
       color: var(--accent);
       letter-spacing: .02em;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
     }
     .hero-bio {
-      font-size: .95rem;
-      line-height: 1.85;
+      font-size: 14px;
+      line-height: 1.9;
       color: var(--text-body);
       max-width: 540px;
     }
@@ -149,68 +204,46 @@
     .hero-bio em { color: var(--accent); font-style: normal; font-weight: 500; }
 
     /* Avatar */
-    .avatar-wrap { display: flex; justify-content: center; }
     .avatar {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #d5cec5 0%, #e6dfd8 50%, #f0ebe4 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 2.6rem;
-      color: #fff;
-      letter-spacing: .04em;
-      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      width: 112px;
+      height: 112px;
+      border-radius: 9px;
+      object-fit: cover;
       flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-      border: 3px solid var(--surface);
-    }
-    .avatar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      box-shadow: inset 0 -4px 12px rgba(0,0,0,.08);
     }
 
     /* ─── Contact ───────────────────────────────────────── */
     .contact-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 60px;
+      gap: 12px;
+      margin-top: 27px;
     }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 15px;
-      border-radius: 99px;
+      padding: 4px 10px;
+      border-radius: 0;
       font-size: .82rem;
       font-weight: 500;
-      border: 1.5px solid var(--border);
-      background: var(--surface);
+      border: 1.5px solid transparent;
+      background: none;
       color: var(--muted);
       transition: all .18s;
       cursor: pointer;
       letter-spacing: .01em;
     }
+    .badge:first-child { padding-left: 0; }
     .badge i { font-size: .85em; }
     .badge:hover {
-      border-color: var(--accent);
-      background: var(--accent-lt);
       color: var(--accent);
-      text-decoration: none;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
+      text-decoration: underline;
     }
-    .badge-email:hover  { border-color: var(--accent-warm); background: #fdf5f2; color: var(--accent-warm); }
+    .badge-email:hover  { color: var(--accent-warm); }
     .badge-email.copied { border-color: var(--green); background: #edfaf3; color: var(--green); }
-    .badge-github:hover { border-color: #24292e; background: #f0f0f0; color: #24292e; }
-    .badge-cv:hover     { border-color: var(--green); background: #edfaf3; color: var(--green); }
+    .badge-github:hover { color: #24292e; }
+    .badge-cv:hover     { color: var(--green); }
 
     /* ─── Sections ──────────────────────────────────────── */
     .section { margin-bottom: 60px; }
@@ -440,12 +473,16 @@
     .timeline { display: flex; flex-direction: column; gap: 0; }
     .tl-item {
       display: grid;
-      grid-template-columns: 110px 1fr;
+      grid-template-columns: 112px minmax(0, 1fr);
       gap: 22px;
       padding: 20px 0;
       border-bottom: 1px solid var(--border);
     }
     .tl-item:last-child { border-bottom: none; }
+    .tl-body { position: relative; padding-right: 98px; }
+    .experience-marks { display: flex; align-items: center; gap: 8px; position: absolute; top: 0; right: 0; }
+    .experience-marks .institution-icon { width: 34px; height: 34px; flex-basis: 34px; }
+    .experience-marks .institution-icon--wordmark { width: 78px; flex-basis: 78px; }
     .tl-period {
       font-family: var(--font-mono);
       font-size: .78rem;
@@ -461,14 +498,15 @@
       margin-bottom: 2px;
     }
     .tl-place {
-      font-size: .85rem;
+      font-size: 12px;
+      line-height: 1.7;
       color: var(--muted);
       margin-bottom: 5px;
     }
     .tl-desc {
-      font-size: .86rem;
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.85;
     }
     .tl-icon {
       display: inline-block;
@@ -549,18 +587,32 @@
     @media (max-width: 680px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 30px;
       }
-      .hero-order-swap { order: -1; display: flex; justify-content: center; }
-      .avatar { width: 120px; height: 120px; font-size: 2rem; }
-      .hero-name { font-size: 1.75rem; }
-      .hero-bio { font-size: .9rem; }
+      .hero-right {
+        display: grid;
+        grid-template-columns: 68px minmax(0, 1fr);
+        gap: 20px;
+        padding: 22px 0 0;
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
+      .avatar { width: 68px; height: 68px; }
+      .hero-name { font-size: 35px; }
+      .hero-affiliations { gap: 18px; }
+      .institution-item { gap: 10px; }
+      .institution-marks { width: 62px; flex-basis: 62px; }
+      .hero-affiliations .institution-icon { width: 28px; height: 28px; flex-basis: 28px; }
+      .hero-affiliations .institution-icon--wordmark { width: 62px; flex-basis: 62px; }
       .topbar-nav { display: none; }
       .topbar-actions { gap: 0; }
       .ri-grid { grid-template-columns: 1fr; gap: 20px; }
       .skills-grid { grid-template-columns: 1fr; gap: 18px; }
       .growth-stage { grid-template-columns: 72px 1fr; gap: 12px; }
-      .tl-item { grid-template-columns: 1fr; gap: 4px; }
+      .tl-item { grid-template-columns: 1fr; gap: 7px; }
+      .tl-body { padding-right: 0; }
+      .experience-marks { position: static; float: right; margin-left: 13px; margin-bottom: 6px; }
+      .tl-desc { clear: both; padding-top: 5px; }
       .tl-period { font-size: .76rem; }
     }
 
@@ -597,34 +649,121 @@
   <!-- Hero -->
   <header class="hero fade-in">
     <div class="hero-left">
-      <div class="hero-name">Zico Xu</div>
+      <div class="hero-heading">
+        <div class="hero-name">Zico Xu</div>
+      </div>
       <div class="hero-name-cn">许梓超</div>
-      <div class="hero-identity">Field Application Engineer · Remote Research Assistant</div>
+      <div class="hero-identity">JoyandAI·FAE / BHE·RA</div>
 
       <p class="hero-bio">
-        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. I am an FAE at JoyandAI in Shenzhen and a Remote Research Assistant at the Brain Health Engineering (BHE) Lab, working on speech emotion recognition.
+        I hold a B.Eng. in Computer Science from <strong>Beijing Institute of Technology, Zhuhai (BITZH)</strong>. I am an FAE at JoyandAI in Shenzhen and a part-time RA in the <strong>Intelligent Audio Research Group</strong> at the Key Laboratory of Brain Health Intelligent Evaluation and Intervention (Beijing Institute of Technology), Ministry of Education, Beijing, China, working on speech emotion recognition.
       </p>
       <p class="hero-bio">
         I am interested in <strong>practical AI applications</strong>, <strong>frontier embodied intelligence</strong>, and <strong>AI safety</strong> — from useful systems people can build with today to reliable robots and AI systems we can trust.
       </p>
+      <!-- Contact -->
+      <div class="contact-row">
+        <span class="badge badge-email" id="email-badge" title="Click to copy">
+          <i class="fas fa-envelope"></i> <span id="email-label">Email</span>
+        </span>
+        <a class="badge badge-github" href="https://github.com/Xuzc317" target="_blank">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <span class="badge badge-cv" id="cv-badge">
+          <i class="fas fa-file-alt"></i> <span id="cv-label">CV</span>
+        </span>
+      </div>
     </div>
-    <div class="hero-right avatar-wrap hero-order-swap">
-      <img src="deng.jpeg" class="avatar" style="object-fit:cover; font-size:0;" alt="Zico Xu" />
-    </div>
+    <aside class="hero-right">
+      <img src="deng.jpeg" class="avatar" width="112" height="112" alt="Zico Xu" />
+      <!-- Shared local assets also appear beside their corresponding experience entries. -->
+      <ul class="hero-affiliations" aria-label="Education and experience">
+        <li class="institution-item">
+          <span class="institution-marks"><span class="institution-icon"><img src="assets/logos/bitzh.png" width="80" height="80" alt="Beijing Institute of Technology, Zhuhai (BITZH)" title="Beijing Institute of Technology, Zhuhai (BITZH)" data-name-en="Beijing Institute of Technology, Zhuhai (BITZH)" data-name-zh="北京理工大学珠海学院（BITZH）" /></span></span>
+          <span class="institution-copy">
+            <strong class="institution-name">BITZH</strong>
+            <small class="institution-period">B.Eng. · 2021–2025</small>
+          </span>
+        </li>
+        <li class="institution-item">
+          <span class="institution-marks"><span class="institution-icon"><img src="assets/logos/bit.jpg" width="80" height="80" alt="Beijing Institute of Technology (BIT)" title="Beijing Institute of Technology (BIT)" data-name-en="Beijing Institute of Technology (BIT)" data-name-zh="北京理工大学（BIT）" /></span><span class="institution-icon"><img src="assets/logos/bhe.jpg" width="80" height="80" alt="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" title="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-en="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-zh="脑健康智能评估与干预教育部重点实验室（BHE）" /></span></span>
+          <span class="institution-copy">
+            <strong class="institution-name">BIT · BHE</strong>
+            <span class="institution-detail">Intelligent Audio Group</span>
+            <small class="institution-period">RA·2025–present</small>
+          </span>
+        </li>
+        <li class="institution-item">
+          <span class="institution-marks"><span class="institution-icon institution-icon--wordmark"><img src="assets/logos/joyandai.svg" width="80" height="80" alt="JoyandAI" title="JoyandAI" data-name-en="JoyandAI" data-name-zh="卓研智趣科技（JoyandAI）" /></span></span>
+          <span class="institution-copy">
+            <strong class="institution-name">JoyandAI</strong>
+            <small class="institution-period">FAE · 2026–present</small>
+          </span>
+        </li>
+      </ul>
+    </aside>
   </header>
 
-  <!-- Contact -->
-  <div class="contact-row fade-in">
-    <span class="badge badge-email" id="email-badge" title="Click to copy">
-      <i class="fas fa-envelope"></i> <span id="email-label">Email</span>
-    </span>
-    <a class="badge badge-github" href="https://github.com/Xuzc317" target="_blank">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-    <span class="badge badge-cv" id="cv-badge">
-      <i class="fas fa-file-alt"></i> <span id="cv-label">CV</span>
-    </span>
-  </div>
+  <!-- Experience -->
+  <section id="experience" class="section fade-in">
+    <div class="section-head">
+      <div class="accent-dot"></div>
+      <h2>Experience</h2>
+      <span class="cn">经历</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-period">2026.09 — Present</div>
+        <div class="tl-body">
+          <div class="experience-marks"><span class="institution-icon institution-icon--wordmark"><img src="assets/logos/joyandai.svg" width="80" height="80" alt="JoyandAI" title="JoyandAI" data-name-en="JoyandAI" data-name-zh="卓研智趣科技（JoyandAI）" /></span></div>
+          <div class="tl-role"><span class="tl-icon"></span>Field Application Engineer (FAE)</div>
+          <div class="tl-place">JoyandAI, Shenzhen</div>
+          <div class="tl-desc">Joined an embodied-AI startup with a maker and geek culture, providing technical support for open-source robotics. My LeRobot project work covers SO-ARM101, XLeRobot, and LeKiWi, with hands-on SO-ARM101 experience in assembly, calibration, teleoperation, data collection, policy training, and troubleshooting. I am currently training RL policies for OpenMicroDuck and working on Sim-to-Real transfer across multiple motion skills, following a switch to domestically sourced servos and adaptations to the mechanical structure. See the team's <a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">open-source tutorials</a>.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2026.05 — 2026.06</div>
+        <div class="tl-body">
+          <div class="tl-role"><span class="tl-icon"></span>Algorithm Assistant Engineer</div>
+          <div class="tl-place">CYDOO (Robotics), ShenZhen</div>
+          <div class="tl-desc">Joined the CYDOO physical-AI team, working on a static 2D navigation prototype: requirements analysis, structured input schema design, offline testing and result validation, plus on-site demos with the team. Also handled internal AI agent tooling setup and delivery documentation, and took part in Realman composite-robot basic operation and debugging (power-on, manual arm motions and homing, chassis path-planning operations). Departed by mutual agreement following a company reorganisation.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2025.06 — Present</div>
+        <div class="tl-body">
+          <div class="experience-marks"><span class="institution-icon"><img src="assets/logos/bit.jpg" width="80" height="80" alt="Beijing Institute of Technology (BIT)" title="Beijing Institute of Technology (BIT)" data-name-en="Beijing Institute of Technology (BIT)" data-name-zh="北京理工大学（BIT）" /></span><span class="institution-icon"><img src="assets/logos/bhe.jpg" width="80" height="80" alt="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" title="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-en="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-zh="脑健康智能评估与干预教育部重点实验室（BHE）" /></span></div>
+          <div class="tl-role"><span class="tl-icon"></span>RA, part-time</div>
+          <div class="tl-place">Key Laboratory of Brain Health Intelligent Evaluation and Intervention (Beijing Institute of Technology), Ministry of Education, Beijing, China</div>
+          <div class="tl-desc">Continued in the Intelligent Audio Research Group after graduation as a part-time RA, supervised by Yan Zhou. Working on a child speech emotion recognition project with Kun Qian as the corresponding author and in collaboration with Enze Li. Contributed to the Guangdong Provincial Key Special Project. Research spans multiple corpora — data processing, quality verification and speaker-independent splitting, plus model experiment runs and result review. Also exploring AI agent tooling and embodied intelligence.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2025.01 — 2025.06</div>
+        <div class="tl-body">
+          <div class="experience-marks"><span class="institution-icon"><img src="assets/logos/bit.jpg" width="80" height="80" alt="Beijing Institute of Technology (BIT)" title="Beijing Institute of Technology (BIT)" data-name-en="Beijing Institute of Technology (BIT)" data-name-zh="北京理工大学（BIT）" /></span><span class="institution-icon"><img src="assets/logos/bhe.jpg" width="80" height="80" alt="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" title="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-en="Key Laboratory of Brain Health Intelligent Evaluation and Intervention (BHE)" data-name-zh="脑健康智能评估与干预教育部重点实验室（BHE）" /></span></div>
+          <div class="tl-role"><span class="tl-icon"></span>Research Intern</div>
+          <div class="tl-place">Key Laboratory of Brain Health Intelligent Evaluation and Intervention (Beijing Institute of Technology), Ministry of Education, Beijing, China</div>
+          <div class="tl-desc">Joined the Intelligent Audio Research Group under the supervision of Associate Prof. Yan Zhou and systematically learned the fundamentals of scientific research — literature review, experimental design, and academic writing. Took on hands-on tasks including data cleaning, dataset preprocessing, baseline reproduction, and preliminary model training. The primary contribution was participating in her child speech emotion recognition project, conducting algorithm research on speech representation learning and emotion classification under real-world acoustic conditions.</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">2021.09 — 2025.06</div>
+        <div class="tl-body">
+          <div class="experience-marks"><span class="institution-icon"><img src="assets/logos/bitzh.png" width="80" height="80" alt="Beijing Institute of Technology, Zhuhai (BITZH)" title="Beijing Institute of Technology, Zhuhai (BITZH)" data-name-en="Beijing Institute of Technology, Zhuhai (BITZH)" data-name-zh="北京理工大学珠海学院（BITZH）" /></span></div>
+          <div class="tl-role"><span class="tl-icon"></span>B.Eng. Computer Science and Technology</div>
+          <div class="tl-place">Beijing Institute of Technology, Zhuhai (BITZH)</div>
+          <div class="tl-desc">Research focus: computer audition, signal processing, and deep learning. Joined the Intelligent Audio Research Group at the Key Laboratory of Brain Health Intelligent Evaluation and Intervention (Beijing Institute of Technology), Ministry of Education, Beijing, China, under the supervision of Associate Prof. Yan Zhou.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- News -->
   <section id="news" class="section fade-in">
@@ -666,11 +805,14 @@
             <span class="work-tag work-tag-project">Hands-on Project</span>
             <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
           </div>
-          <div class="work-title">SO-ARM101 Teleoperation and Imitation Learning</div>
+          <div class="work-title">LeRobot Projects: SO-ARM101, XLeRobot &amp; LeKiWi</div>
           <div class="work-desc">
+            <p class="work-desc-p">My hands-on work at JoyandAI spans the <span class="highlight">LeRobot ecosystem</span>, covering SO-ARM101, XLeRobot, and LeKiWi. This project direction brings together robot hardware setup, teleoperation, data collection, and imitation learning, from arm manipulation to mobile robot platforms.</p>
             <p class="work-desc-p">At JoyandAI, I assembled a <span class="highlight">SO-ARM101 leader–follower pair</span>, assigned and checked servo IDs, calibrated both arms, and brought up teleoperation. This gave me hands-on experience with the complete path from mechanical assembly and wiring to coordinated arm motion.</p>
             <p class="work-desc-p">I collected teleoperated demonstrations using <span class="highlight">two cameras</span>, trained an ACT imitation-learning policy on the recorded data, and ran model inference. The workflow connected robot setup, visual data collection, policy training, and inference.</p>
             <p class="work-desc-p">I traced several hardware and calibration failures: duplicate servo IDs on parts reused from another project, reversed ID assignments on the leader arm, a cable short when the arm folded, and a midpoint offset that drove a servo beyond its physical range. JoyandAI's <a href="https://www.makerobots.cn/tutorial/soarm101/v0.4.3/prerequisites/git-basics-linux" target="_blank" rel="noopener noreferrer">SO-ARM101 tutorial (v0.4.3)</a> is a reference for the setup workflow.</p>
+            <p class="work-desc-p"><strong>XLeRobot — dual-arm mobile manipulation.</strong> The platform combines two SO-101 arms with a mobile base. Its <a href="https://xlerobot.readthedocs.io/en/latest/software/index.html" target="_blank" rel="noopener noreferrer">control stack</a> supports joint-space control, inverse-kinematics-based end-effector control, and keyboard or gamepad teleoperation of the arms and base. The documented <a href="https://xlerobot.readthedocs.io/en/latest/software/getting_started/VLA_smol.html" target="_blank" rel="noopener noreferrer">bimanual learning workflow</a> records multiple camera views and arm actions for ACT policy training and inference.</p>
+            <p class="work-desc-p"><strong>LeKiWi — omnidirectional mobile manipulation.</strong> A three-omniwheel base carries an SO-100/SO-101 follower arm. Leader-arm joint positions drive the arm, while keyboard commands set forward, lateral, and rotational base velocities. The <a href="https://huggingface.co/docs/lerobot/lekiwi" target="_blank" rel="noopener noreferrer">LeRobot host/client workflow</a> connects the onboard computer and operator workstation through ZeroMQ, with camera observations and robot actions recorded into demonstration episodes for imitation learning.</p>
           </div>
           <div class="work-result-row">
             <span class="work-stat">Assembly &amp; calibration</span>
@@ -681,17 +823,18 @@
 
         <div class="work-card">
           <div class="work-card-header">
-            <span class="work-tag work-tag-project">Next Research Focus</span>
+            <span class="work-tag work-tag-project">Current Project</span>
             <span class="work-venue"><span class="venue-badge">2026.09 — Present</span></span>
           </div>
-          <div class="work-title">OpenMicroDuck / microduck_rl</div>
+          <div class="work-title">OpenMicroDuck: RL Training and Sim-to-Real</div>
           <div class="work-desc">
-            <p class="work-desc-p">JoyandAI's <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> recreates the open-source MicroDuck biped with domestically sourced parts to make the platform more affordable. Because the actuator hardware differs from the original, its control policies need to be tested and adapted for the new physical setup. The team's <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl fork</a> provides the reinforcement-learning environment.</p>
-            <p class="work-desc-p">I am learning the assembly and hardware workflow and testing trained policies in <span class="highlight">MuJoCo simulation</span>. OpenMicroDuck will be my <span class="highlight">main next research focus</span>: I plan to study the gap between simulation and the domestic hardware, then investigate PPO policy optimization. These are ongoing and planned steps, not completed research results.</p>
+            <p class="work-desc-p">JoyandAI's <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> builds on the open-source MicroDuck biped with domestically sourced parts to make the platform more affordable. The robot uses <span class="highlight">domestically sourced servos and an adapted mechanical structure</span>, requiring its control policy to be retrained for the revised hardware. The team's <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl fork</a> provides the reinforcement-learning environment.</p>
+            <p class="work-desc-p">The published training stack uses <span class="highlight">mjlab (MuJoCo Warp) and PPO</span>, with BAM actuator modeling and domain randomization to represent hardware dynamics and their variation. Policies are exported to ONNX for real-robot inference. This provides the technical basis for adapting control policies after changes to the servos and mechanical structure.</p>
+            <p class="work-desc-p">Building on my earlier work learning the assembly workflow and testing policies in MuJoCo, I am currently <span class="highlight">training RL models and working on Sim-to-Real transfer</span> for <strong>Walk, Stand Up, VelStand, GroundPick, Ground, and roller-standing</strong> policies. The focus is transferring policies trained for the domestically sourced servos and adapted structure to the physical robot.</p>
           </div>
           <div class="work-result-row">
-            <span class="work-stat">Current: MuJoCo policy testing</span>
-            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Next: PPO research</span>
+            <span class="work-stat">PPO policy training</span>
+            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Sim-to-Real in progress</span>
           </div>
         </div>
       </section>
@@ -701,19 +844,21 @@
 
         <div class="work-card">
           <div class="work-card-header">
-            <span class="work-tag work-tag-project">Research in Progress</span>
+            <span class="work-tag work-tag-project">Next-Phase Planning</span>
             <span class="work-venue"><span class="venue-badge">2026.01 — Present</span></span>
           </div>
           <div class="work-title">System Reconstruction under Distribution Shift: A Case Study in Child Speech Emotion Recognition</div>
+          <div class="work-meta">Intelligent Audio Research Group · Supervisor: Yan Zhou<br />Corresponding author: Kun Qian · Collaborator: Enze Li</div>
           <div class="work-desc">
+            <p class="work-desc-p"><strong>Current progress:</strong> After discussing the next research directions with the subgroup lead, a PhD student, I am organizing the research plan for the next phase, building on the completed experiments and findings below.</p>
             <p class="work-desc-p">Reproduced an existing baseline and found <span class="highlight">speaker overlap</span> between its train and test splits. Switched to strict <span class="highlight">speaker-independent partitioning</span> (MD5 hash, zero-leakage assertion) and re-evaluated; the earlier scores did not hold under the corrected split. Root cause identified: mean-pooled handcrafted features (162-dim) collapse the temporal axis, so the Conv1d stack slides along the feature dimension rather than time.</p>
             <p class="work-desc-p">Rebuilt the evaluation pipeline around frame-level <span class="highlight">WavLM Base representations</span>, 12-layer fusion, and temporal pooling, then completed a <span class="highlight">210-run experimental suite</span> across C-BESD, FAU Aibo, and IEMOCAP. The study tests pooling, augmentation, layer fusion, backbone fine-tuning, ablations, and cross-corpus transfer under speaker-independent splits.</p>
-            <p class="work-desc-p">On C-BESD, the three-seed weighted accuracy reached <span class="highlight">91.87% with a frozen backbone</span> and <span class="highlight">96.91% after fine-tuning</span>. Zero-shot transfer dropped sharply across corpora; target-domain fine-tuning recovered performance, with gains that depended on the target dataset. The experimental suite is complete; analysis and manuscript work remain in progress.</p>
+            <p class="work-desc-p">On C-BESD, the three-seed weighted accuracy reached <span class="highlight">91.87% with a frozen backbone</span> and <span class="highlight">96.91% after fine-tuning</span>. Zero-shot transfer dropped sharply across corpora; target-domain fine-tuning recovered performance, with gains that depended on the target dataset. The experimental suite is complete.</p>
           </div>
           <div class="work-result-row">
             <span class="work-stat">Speaker-independent evaluation</span>
             <span class="work-stat">210 validated runs</span>
-            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Research in progress</span>
+            <span class="work-stat" style="background:#fdf5f2;color:var(--accent-warm);">Research plan in preparation</span>
           </div>
         </div>
       </section>
@@ -809,65 +954,8 @@
       </div>
       <div class="skills-cat">
         <div class="skills-cat-label">Reinforcement Learning &amp; Embodied AI</div>
-        <div class="skills-cat-list">SO-ARM101 assembly, calibration, teleoperation, dual-camera data collection, ACT policy training and inference. Currently exploring MuJoCo policy testing and PPO optimization for small bipedal robots.</div>
+        <div class="skills-cat-list">LeRobot project work covering SO-ARM101, XLeRobot, and LeKiWi; hands-on SO-ARM101 assembly, calibration, teleoperation, dual-camera data collection, ACT policy training and inference. MuJoCo policy testing, PPO training, and ongoing Sim-to-Real work for multiple OpenMicroDuck motion skills after servo replacement and structural adaptation.</div>
       </div>
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section id="experience" class="section fade-in">
-    <div class="section-head">
-      <div class="accent-dot"></div>
-      <h2>Experience</h2>
-      <span class="cn">经历</span>
-    </div>
-    <div class="timeline">
-
-      <div class="tl-item">
-        <div class="tl-period">2026.09 — Present</div>
-        <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>Field Application Engineer (FAE)</div>
-          <div class="tl-place">JoyandAI, Shenzhen</div>
-          <div class="tl-desc">Joined an embodied-AI startup with a maker and geek culture, providing technical support for open-source robotics. The team's work spans OpenMicroDuck, SO-ARM101, LeKiWi, and XLeRobot in the LeRobot ecosystem. Hands-on work includes SO-ARM101 assembly, calibration, teleoperation, data collection, policy training, and troubleshooting. See the team's <a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">open-source tutorials</a>.</div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-period">2026.05 — 2026.06</div>
-        <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>Algorithm Assistant Engineer</div>
-          <div class="tl-place">CYDOO (Robotics), ShenZhen</div>
-          <div class="tl-desc">Joined the CYDOO physical-AI team, working on a static 2D navigation prototype: requirements analysis, structured input schema design, offline testing and result validation, plus on-site demos with the team. Also handled internal AI agent tooling setup and delivery documentation, and took part in Realman composite-robot basic operation and debugging (power-on, manual arm motions and homing, chassis path-planning operations). Departed by mutual agreement following a company reorganisation.</div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-period">2025.06 — Present</div>
-        <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>Remote Research Assistant</div>
-          <div class="tl-place">Brain Health Engineering (BHE) Lab, BIT</div>
-          <div class="tl-desc">Continued at BHE Lab remotely after graduation as a part-time research assistant. Contributed to the Guangdong Provincial Key Special Project. Working on child speech emotion recognition across multiple corpora — data processing, quality verification and speaker-independent splitting, plus model experiment runs and result review. Also exploring AI agent tooling and embodied intelligence.</div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-period">2025.01 — 2025.06</div>
-        <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>Research Intern</div>
-          <div class="tl-place">Brain Health Engineering (BHE) Lab, BIT</div>
-          <div class="tl-desc">Joined the lab and systematically learned the fundamentals of scientific research — literature review, experimental design, and academic writing. Took on hands-on tasks including data cleaning, dataset preprocessing, baseline reproduction, and preliminary model training. The primary contribution was participating in Associate Prof. Zhou's child speech emotion recognition project, conducting algorithm research on speech representation learning and emotion classification under real-world acoustic conditions.</div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-period">2021.09 — 2025.06</div>
-        <div class="tl-body">
-          <div class="tl-role"><span class="tl-icon"></span>B.Eng. Computer Science and Technology</div>
-          <div class="tl-place">Beijing Institute of Technology, Zhuhai (BITZH)</div>
-          <div class="tl-desc">Research focus: computer audition, signal processing, and deep learning. Joined the Brain Health Engineering (BHE) Lab where Associate Prof. Zhou works.</div>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -905,21 +993,21 @@
         <div class="growth-stage-num">2023-2024</div>
         <div class="growth-stage-body">
           <div class="growth-stage-label">A fateful encounter</div>
-          <div class="growth-stage-desc">Took Associate Prof. Zhou's Speech Recognition course and served as course representative. Consistent engagement — in and after class — earned her trust. She invited me to join the AI &amp; Embedded Lab, my first entry into a research environment.</div>
+          <div class="growth-stage-desc">Took Associate Prof. Yan Zhou's Speech Recognition course and served as course representative. Consistent engagement — in and after class — earned her trust. She invited me to join the AI &amp; Embedded Lab, my first entry into a research environment.</div>
         </div>
       </div>
       <div class="growth-stage">
         <div class="growth-stage-num">2025.01-06</div>
         <div class="growth-stage-body">
-          <div class="growth-stage-label">Research internship — BHE Lab</div>
-          <div class="growth-stage-desc">Senior year: university restructuring led Associate Prof. Zhou to the Brain Health Engineering (BHE) Lab at BIT. She invited me for a research internship. Within the Audio Intelligent Medicine Research Group, I contributed to a provincial-level key project and chose a focused direction for my graduation thesis. Transitioned from coursework-based learning to independent, in-depth research.</div>
+          <div class="growth-stage-label">Research internship — Intelligent Audio Research Group</div>
+          <div class="growth-stage-desc">Senior year: university restructuring led Associate Prof. Yan Zhou to the Key Laboratory of Brain Health Intelligent Evaluation and Intervention (Beijing Institute of Technology), Ministry of Education, Beijing, China. She invited me for a research internship. Within the Intelligent Audio Research Group, I contributed to a provincial-level key project and chose a focused direction for my graduation thesis. Transitioned from coursework-based learning to independent, in-depth research.</div>
         </div>
       </div>
       <div class="growth-stage">
         <div class="growth-stage-num">2025.06-Now</div>
         <div class="growth-stage-body">
-          <div class="growth-stage-label">Remote Research Assistant — BHE Lab, BIT</div>
-          <div class="growth-stage-desc">After graduation, continued at BHE Lab remotely as a part-time research assistant. Working on child speech emotion recognition across multiple corpora — data processing, quality verification and speaker-independent splitting, plus model experiment runs and result review. Also exploring AI agent tooling and embodied intelligence.</div>
+          <div class="growth-stage-label">RA, part-time — Intelligent Audio Research Group</div>
+          <div class="growth-stage-desc">After graduation, continued in the Intelligent Audio Research Group as a part-time RA under the supervision of Yan Zhou. Working on child speech emotion recognition across multiple corpora — data processing, quality verification and speaker-independent splitting, plus model experiment runs and result review. Also exploring AI agent tooling and embodied intelligence.</div>
         </div>
       </div>
       <div class="growth-stage">
@@ -966,42 +1054,57 @@
   // Static, site-authored translations. The original English markup remains the fallback.
   const translations = [
     ['.topbar-nav a', ['研究方向', '精选作品', '成长经历', '技术技能']],
-    ['.hero-identity', ['现场应用工程师（FAE） · 远程研究助理']],
+    ['.hero-identity', ['JoyandAI·FAE / BHE·RA']],
     ['.hero-bio', [
-      '我毕业于<strong>北京理工大学珠海学院（BITZH）</strong>，获计算机科学与技术工学学士学位。目前在深圳卓研智趣担任 FAE，同时在脑健康工程实验室（BHE Lab）担任远程研究助理，研究语音情感识别。',
+      '我毕业于<strong>北京理工大学珠海学院（BITZH）</strong>，获计算机科学与技术工学学士学位。目前在深圳卓研智趣科技担任技术支持工程师，同时在北京理工大学脑健康智能评估与干预教育部重点实验室的<strong>智能音频课题组</strong>担任科研助理（兼职），研究语音情感识别。',
       '我关注<strong>AI 应用</strong>、<strong>前沿具身智能</strong>和<strong>AI 安全</strong>：既希望让现有 AI 真正解决问题，也关心机器人与 AI 系统如何可靠地工作。'
     ]],
-    ['.section-head h2', ['动态', '精选作品', '成果发布', '研究兴趣', '技术技能', '经历', '成长与思考']],
+    ['#experience .section-head h2', ['经历']],
+    ['#news .section-head h2', ['动态']],
+    ['#work .section-head h2', ['精选作品']],
+    ['#additional-work .section-head h2', ['成果发布']],
+    ['#research .section-head h2', ['研究兴趣']],
+    ['#skills .section-head h2', ['技术技能']],
+    ['#growth .section-head h2', ['成长与思考']],
+    ['.institution-name', ['北京理工大学珠海学院', '北京理工大学 · BHE', '卓研智趣科技']],
+    ['.institution-detail', ['智能音频课题组']],
+    ['.institution-period', ['本科 · 2021–2025', 'RA·2025-至今', '技术支持 · 2026–至今']],
     ['.news-text', [
       '2026 年 9 月加入深圳<strong>卓研智趣</strong>，担任 FAE，为开源机器人社区提供技术支持。',
       '公司重组后，经双方协商一致离开<strong>乘杜科技</strong>。',
       '很高兴加入<strong>乘杜科技</strong>，担任算法助理工程师！'
     ]],
     ['#work .work-group-title', ['具身智能', '语音学与智能音频', '感兴趣与尝试研究']],
-    ['#work .work-card .work-tag', ['实践项目', '下一阶段主要研究', '研究中', '尝试研究']],
+    ['#work .work-card .work-tag', ['实践项目', '当前进行中', '后续方案整理中', '尝试研究']],
     ['#work .work-card .work-venue .venue-badge', ['2026.09 — 至今', '2026.09 — 至今', '2026.01 — 至今', '2026.05 — 2026.06']],
     ['#work .work-title', [
-      'SO-ARM101 遥操作与模仿学习',
-      'OpenMicroDuck / microduck_rl',
+      'LeRobot 项目：SO-ARM101、XLeRobot 与 LeKiWi',
+      'OpenMicroDuck：强化学习训练与 Sim-to-Real',
       '分布变化下的系统重构：以儿童语音情感识别为例',
       'SMDSL：具身智能空间运动建模的领域特定语言'
     ]],
+    ['#work .work-meta', ['智能音频课题组 · 指导教师：周雁<br />通讯作者：钱昆 · 项目合作：李恩泽']],
     ['#work .work-desc-p', [
+      '我在卓研智趣科技的实践围绕<strong>LeRobot 生态</strong>展开，涵盖 SO-ARM101、XLeRobot 和 LeKiWi。这个项目方向贯通机器人硬件配置、遥操作、数据采集与模仿学习，从机械臂操作延伸到移动机器人平台。',
       '在卓研智趣，我组装了一对<strong>SO-ARM101 主臂与从臂</strong>，为舵机编号并核对 ID，分别标定两只机械臂，完成遥操作联调。这让我亲手走通了从机械装配、接线到双臂协同运动的流程。',
       '我使用<strong>双相机</strong>采集遥操作示教数据，以采集的数据训练 ACT 模仿学习策略，并运行模型推理。整个流程贯通了机器人配置、视觉数据采集、策略训练和推理。',
       '我排查了多项硬件与标定问题：从其他项目拆下的组件导致舵机 ID 重复、主臂 ID 分配顺序相反、机械臂折叠时线路短路，以及舵机中位偏移导致动作超出物理限位。配置流程可参考卓研智趣的<a href="https://www.makerobots.cn/tutorial/soarm101/v0.4.3/prerequisites/git-basics-linux" target="_blank" rel="noopener noreferrer">SO-ARM101 教程（v0.4.3）</a>。',
-      '卓研智趣的 <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> 使用国产配件复刻开源双足机器人 MicroDuck，以降低平台成本。由于执行器硬件与原版不同，控制策略需要针对新的实体配置重新测试与适配；团队的 <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl 分支</a>提供强化学习环境。',
-      '我正在熟悉装配与硬件流程，并在<strong>MuJoCo 仿真</strong>中测试已训练策略。OpenMicroDuck 将是我<strong>接下来的主要研究方向</strong>：计划分析仿真与国产硬件之间的差异，再探索 PPO 策略优化。这些仍是正在进行或计划中的工作，尚非完成的研究成果。',
+      '<strong>XLeRobot：双臂移动操作。</strong>平台结合双 SO-101 机械臂与移动底盘，<a href="https://xlerobot.readthedocs.io/en/latest/software/index.html" target="_blank" rel="noopener noreferrer">控制链路</a>支持关节空间控制、基于逆运动学的末端控制，以及通过键盘或手柄协调双臂与底盘。公开的<a href="https://xlerobot.readthedocs.io/en/latest/software/getting_started/VLA_smol.html" target="_blank" rel="noopener noreferrer">双臂学习流程</a>记录多视角相机图像与机械臂动作，用于 ACT 策略训练和推理。',
+      '<strong>LeKiWi：全向移动操作。</strong>平台将三全向轮底盘与 SO-100/SO-101 从臂结合，通过主臂关节位置控制机械臂，通过键盘设定底盘前后、横向和旋转速度。<a href="https://huggingface.co/docs/lerobot/lekiwi" target="_blank" rel="noopener noreferrer">LeRobot 主机／客户端流程</a>使用 ZeroMQ 连接板载计算机与操作端，并将相机观测和机器人动作记录为示教片段，供模仿学习使用。',
+      '卓研智趣科技的 <a href="https://github.com/JoyandAI/OpenMicroDuck" target="_blank" rel="noopener noreferrer">OpenMicroDuck</a> 基于开源双足机器人 MicroDuck，使用国产配件降低平台成本。机器人<strong>更换了国产舵机，并对机械结构进行了适配</strong>，因此需要针对新的硬件配置重新训练控制策略；团队的 <a href="https://github.com/JoyandAI/microduck_rl" target="_blank" rel="noopener noreferrer">microduck_rl 分支</a>提供强化学习环境。',
+      '公开训练框架基于<strong>mjlab（MuJoCo Warp）与 PPO</strong>，结合 BAM 执行器建模和域随机化，描述硬件动力学及其变化；策略导出为 ONNX，用于实机推理。这为更换舵机、调整机械结构后的控制策略适配提供技术基础。',
+      '在前期熟悉装配流程、使用 MuJoCo 测试策略的基础上，我目前正在进行<strong>强化学习模型训练与 Sim-to-Real</strong>，主要覆盖<strong>Walk、Stand Up、VelStand、GroundPick、Ground 以及滑轮站立</strong>等模型，重点将针对国产舵机和适配后结构训练的策略迁移到真实机器人。',
+      '<strong>近期进展：</strong>已与课题组中担任小组长的博士生讨论后续研究方向，目前正在基于下述已完成实验与发现，整理下一阶段研究方案。',
       '我复现了原有基线，发现训练集与测试集存在<strong>说话人重叠</strong>。随后改用严格的<strong>说话人独立划分</strong>（MD5 哈希与零泄漏断言）重新评估，原先分数在修正后未能保持。进一步定位到一个结构问题：对 162 维手工特征做均值池化会抹去时间轴，使 Conv1d 沿特征维度而非时间维度滑动。',
       '我围绕帧级<strong>WavLM Base 表征</strong>、12 层融合与时间池化重建了评估流程，并在 C-BESD、FAU Aibo 和 IEMOCAP 上完成<strong>210 次实验</strong>。研究覆盖池化、数据增强、层融合、主干微调、模块消融与跨语料迁移，均使用说话人独立划分。',
-      '在 C-BESD 上，三随机种子的加权准确率在<strong>冻结主干时达到 91.87%</strong>，<strong>微调后达到 96.91%</strong>。跨语料零样本迁移的表现明显下降；在目标域微调可以恢复性能，但增益取决于目标数据集。实验矩阵已经完成，分析与论文工作仍在进行中。',
+      '在 C-BESD 上，三随机种子的加权准确率在<strong>冻结主干时达到 91.87%</strong>，<strong>微调后达到 96.91%</strong>。跨语料零样本迁移的表现明显下降；在目标域微调可以恢复性能，但增益取决于目标数据集。实验矩阵已经完成。',
       '这个想法源于我在乘杜科技与 CEO 讨论具身智能的未来方向：视觉-语言-动作（VLA）系统、即开即用的工业机器人、通用管道和领域特定语言。我参考李飞飞团队的世界模型研究、具身智能、A* 搜索、图像分割与工业 CAD 解析，探索如何用结构化中间表示衔接高层任务意图与底层机器人控制。',
       '公开的 <a href="https://github.com/Xuzc317/SMDSL_2D" target="_blank" rel="noopener noreferrer">SMDSL_2D 原型</a>实现了基于 Python 的<strong>静态二维导航契约</strong>，包括占据栅格、距离场、A* 拓扑与离线验证。长期目标是探索基于 <strong>Rust 的硬件无关 DSL 与通用管道</strong>，高效地将任务描述转化为机器人指令，寻找 CUDA 中心化工具链之外的路径。更完整的系统仍属于尝试研究方向。'
     ]],
     ['#work .work-stat', [
       '组装与标定', '双相机数据采集', 'ACT 训练与推理',
-      '当前：MuJoCo 策略测试', '下一步：PPO 研究',
-      '说话人独立评估', '210 次有效实验', '研究中',
+      'PPO 策略训练', 'Sim-to-Real 进行中',
+      '说话人独立评估', '210 次有效实验', '研究方案整理中',
       '静态二维原型', '尝试研究'
     ]],
     ['#additional-work .work-tag', ['软件著作权', '论文发表']],
@@ -1028,42 +1131,42 @@
       'Claude Code、Codex、Cursor、ChatGPT、Gemini、DeepSeek 已融入我的研究与开发流程。我采用人主导决策、AI 辅助执行的方式开发。',
       'Python、PyTorch、CUDA/GPU 训练、Linux、Git；使用 Librosa 处理语音与时间序列数据，通过 ONNX 部署模型，并实践数据增强与小样本学习。',
       'RAG、智能体与工具调用架构，提示词工程，Vibe Coding 与 Harness Engineering 方法，以及端到端 AI 系统集成。',
-      'SO-ARM101 组装、标定、遥操作、双相机数据采集、ACT 策略训练与推理。目前正在探索使用 MuJoCo 测试小型双足机器人策略和 PPO 优化。'
+      'LeRobot 项目实践涵盖 SO-ARM101、XLeRobot 和 LeKiWi；具体包括 SO-ARM101 组装、标定、遥操作、双相机数据采集、ACT 策略训练与推理。使用 MuJoCo 测试策略，并为更换舵机与结构适配后的 OpenMicroDuck 开展 PPO 训练及多种动作模型的 Sim-to-Real。'
     ]],
     ['.tl-period', ['2026.09 — 至今', '2026.05 — 2026.06', '2025.06 — 至今', '2025.01 — 2025.06', '2021.09 — 2025.06']],
     ['.tl-role', [
-      '<span class="tl-icon"></span>现场应用工程师（FAE）',
+      '<span class="tl-icon"></span>技术支持工程师（FAE）',
       '<span class="tl-icon"></span>算法助理工程师',
-      '<span class="tl-icon"></span>远程研究助理',
+      '<span class="tl-icon"></span>科研助理（兼职）',
       '<span class="tl-icon"></span>研究实习生',
       '<span class="tl-icon"></span>计算机科学与技术工学学士'
     ]],
     ['.tl-place', [
       '卓研智趣，深圳',
       '乘杜机器人（深圳）',
-      '北京理工大学脑健康工程实验室（BHE Lab）',
-      '北京理工大学脑健康工程实验室（BHE Lab）',
+      '脑健康智能评估与干预教育部重点实验室（北京理工大学）',
+      '脑健康智能评估与干预教育部重点实验室（北京理工大学）',
       '北京理工大学珠海学院（BITZH）'
     ]],
     ['.tl-desc', [
-      '加入一家具有极客与创客文化的具身智能创业公司，为开源机器人提供技术支持。团队项目涵盖 LeRobot 生态中的 OpenMicroDuck、SO-ARM101、LeKiWi 和 XLeRobot。我主要参与 SO-ARM101 的组装、标定、遥操作、数据采集、策略训练与故障排查。另见团队的<a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">开源教程</a>。',
+      '加入一家具有极客与创客文化的具身智能创业公司，为开源机器人提供技术支持。LeRobot 项目实践涵盖 SO-ARM101、XLeRobot 和 LeKiWi，其中 SO-ARM101 的具体工作包括组装、标定、遥操作、数据采集、策略训练与故障排查。目前正在为 OpenMicroDuck 训练强化学习模型，在更换国产舵机与机械结构适配后，开展多种动作模型的 Sim-to-Real。另见团队的<a href="https://www.makerobots.cn/" target="_blank" rel="noopener noreferrer">开源教程</a>。',
       '加入乘杜科技的具身智能团队，参与静态二维导航原型的需求分析、结构化输入设计、离线测试、结果验证与现场演示；还负责内部 AI 智能体工具的配置和交付文档，并参与睿尔曼复合机器人的基础操作与调试。公司重组后，经双方协商一致离职。',
-      '毕业后以兼职远程研究助理身份继续在 BHE Lab 工作，参与广东省重点专项。在多个语料库上开展儿童语音情感识别研究，包括数据处理、质量检查、说话人独立划分、模型实验和结果复核；也探索 AI 智能体工具与具身智能。',
-      '进入实验室后系统学习文献综述、实验设计与学术写作，并承担数据清洗、预处理、基线复现和初步模型训练等任务。主要参与周副教授的儿童语音情感识别项目，研究真实声学条件下的语音表征学习与情感分类。',
-      '研究兴趣集中于计算机听觉、信号处理与深度学习，并加入周副教授所在的脑健康工程实验室。'
+      '毕业后继续在智能音频课题组担任科研助理（兼职），由周雁老师指导。参与儿童语音情感识别项目，通讯作者为钱昆老师，并与李恩泽学长合作。参与广东省重点专项，在多个语料库上开展研究，包括数据处理、质量检查、说话人独立划分、模型实验和结果复核；也探索 AI 智能体工具与具身智能。',
+      '在周雁副教授指导下加入智能音频课题组，系统学习文献综述、实验设计与学术写作，并承担数据清洗、预处理、基线复现和初步模型训练等任务。主要参与她的儿童语音情感识别项目，研究真实声学条件下的语音表征学习与情感分类。',
+      '研究兴趣集中于计算机听觉、信号处理与深度学习，并在周雁副教授指导下加入北京理工大学脑健康智能评估与干预教育部重点实验室的智能音频课题组。'
     ]],
     ['.growth-stage-num', ['2021 年前', '2021—2022', '2022—2023', '2023—2024', '2025.01—06', '2025.06—至今', '2026.05—06', '2026.09—至今']],
     ['.growth-stage-label', [
       '大学之前', '最初的专业：自动化', '转向计算机科学', '与科研的第一次相遇',
-      'BHE Lab 研究实习', 'BHE Lab 远程研究助理', '乘杜科技的短期产业经历', '从研究走向动手机器人实践'
+      '智能音频课题组研究实习', '智能音频课题组科研助理（兼职）', '乘杜科技的短期产业经历', '从研究走向动手机器人实践'
     ]],
     ['.growth-stage-desc', [
       '那时的知识主要来自课本和老师，学习意味着掌握安排好的内容。我对技术很好奇，却还不知道如何独立提出并研究问题。',
       '我以自动化专业进入北京理工大学珠海学院。起初的大学生活仍像高中的延续：上课、完成任务。随着时间推移，我开始意识到自己更想走另一条路。',
       '我发现自己真正感兴趣的是编程、算法和 AI，于大一第一学期转入计算机科学与技术专业。课程项目让我开始面对没有标准答案的问题，自主学习逐渐成为习惯。',
-      '我选修了周副教授的语音识别课程，并担任课代表。课堂内外的持续交流让她邀请我加入 AI 与嵌入式实验室，这是我第一次进入科研环境。',
-      '大四时，院校调整使周副教授转入北京理工大学脑健康工程实验室，她邀请我参与研究实习。我在音频智能医学研究组参与省级重点项目，并为毕业论文确定方向，逐步从课程学习转向独立研究。',
-      '毕业后，我继续以兼职远程研究助理身份参与 BHE Lab 的儿童语音情感识别研究，处理多语料数据、检查质量与说话人划分、运行实验并复核结果，同时探索 AI 智能体工具和具身智能。',
+      '我选修了周雁副教授的语音识别课程，并担任课代表。课堂内外的持续交流让她邀请我加入 AI 与嵌入式实验室，这是我第一次进入科研环境。',
+      '大四时，院校调整使周雁副教授转入北京理工大学脑健康智能评估与干预教育部重点实验室，她邀请我参与研究实习。我在智能音频课题组参与省级重点项目，并为毕业论文确定方向，逐步从课程学习转向独立研究。',
+      '毕业后，我继续在智能音频课题组担任科研助理（兼职），在周雁老师指导下开展儿童语音情感识别研究，处理多语料数据、检查质量与说话人划分、运行实验并复核结果，同时探索 AI 智能体工具和具身智能。',
       '我短期加入乘杜科技的具身智能团队，参与静态二维导航原型和内部 AI 智能体工具工作。公司重组后，双方协商一致结束合作。',
       '我在深圳加入卓研智趣，担任 FAE。开源机器人平台的工作让我更完整地接触从硬件配置、遥操作到示教数据、策略训练、仿真与用户支持的实践链路。'
     ]],
@@ -1105,6 +1208,12 @@
     document.title = currentLanguage === 'zh' ? 'Zico 的家' : "Zico's home";
     mainNav.setAttribute('aria-label', currentLanguage === 'zh' ? '主导航' : 'Main navigation');
     document.querySelector('.avatar').alt = currentLanguage === 'zh' ? '许梓超' : 'Zico Xu';
+    document.querySelector('.hero-affiliations').setAttribute('aria-label', currentLanguage === 'zh' ? '教育与工作经历相关机构' : 'Education and experience');
+    document.querySelectorAll('img[data-name-en]').forEach(logo => {
+      const name = currentLanguage === 'zh' ? logo.dataset.nameZh : logo.dataset.nameEn;
+      logo.alt = name;
+      logo.title = name;
+    });
     langToggle.textContent = currentLanguage === 'zh' ? 'English' : '中文';
     langToggle.setAttribute('aria-label', currentLanguage === 'zh' ? 'Switch to English' : '切换为中文');
     langToggle.setAttribute('aria-pressed', String(currentLanguage === 'zh'));
